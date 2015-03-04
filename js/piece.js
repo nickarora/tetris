@@ -1,0 +1,6 @@
+(function(){	
+
+	Tetris.Piece = function(){
+	}
+	
+})();
