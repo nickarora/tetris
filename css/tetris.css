@@ -1,3 +1,5 @@
-canvas {
+canvas#main {
+	width: 432px;
+	height: 480px;
 	background-color: #000;
 }

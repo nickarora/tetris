@@ -8,11 +8,7 @@
 		var px = x * Tetris.TILESIZE;
 		var py = y * Tetris.TILESIZE;
 
-		ctx.beginPath();
-    ctx.rect(px, py, Tetris.TILESIZE, Tetris.TILESIZE);
-    ctx.fillStyle = this.getRandomColor();
-    ctx.fill();
-    ctx.stroke();
+		Tetris.bgBlock.draw(ctx, px, py);
 	};
 
 	Tetris.Block.prototype.getRandomColor = function() {
