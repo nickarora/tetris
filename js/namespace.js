@@ -8,6 +8,8 @@
 	Tetris.BOARD_HEIGHT = 20;
 	Tetris.BOARD_WIDTH = 12;
 
+	Tetris.EMPTY = 0;
+
 	Tetris.BLOCKCOLORS = {
 	  'L' 			: 1,
 	  'J' 			: 2,

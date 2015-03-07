@@ -3,6 +3,7 @@
 	Tetris.Game = function(canvas){
 		this.ctx = canvas.getContext("2d");
 		this.board = new Tetris.Board({ ctx: this.ctx });
+		this.curPiece = null;
 		this.loadImages();
 	};
 
@@ -22,12 +23,13 @@
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
-		var piece = new Tetris.LPiece();
+		this.curPiece = new Tetris.LPiece();
+		this.board.add(this.curPiece);
 	};
 
 	Tetris.Game.prototype.play = function() {
-		this.board.draw();
 		this.generatePiece();
+		this.board.draw();
 	};
 
 })();
