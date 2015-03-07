@@ -32,6 +32,8 @@
 			this.set(0, y, Tetris.BORDER_BLOCK);
 			this.set(Tetris.BOARD_WIDTH - 1, y, Tetris.BORDER_BLOCK);
 		}
+
+		this.set( 4, 2, Tetris.BLOCKCOLORS.L);
 	};
 
 	Tetris.Board.prototype.draw = function() {

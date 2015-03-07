@@ -12,8 +12,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.LINE
 		};
 		Tetris.Piece.call(this, opt);
@@ -26,8 +26,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.SQUARE
 		};
 		Tetris.Piece.call(this, opt);
@@ -43,8 +43,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.Z
 		};
 		Tetris.Piece.call(this, opt);
@@ -61,8 +61,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.S
 		};
 		Tetris.Piece.call(this, opt);
@@ -85,8 +85,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.L
 		};
 		Tetris.Piece.call(this, opt);
@@ -109,8 +109,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.J
 		};
 		Tetris.Piece.call(this, opt);
@@ -133,8 +133,8 @@
 		];
 
 		var opt = { 
-			x: 3, 
-			y: 3,
+			x: 4, 
+			y: 2,
 			color: Tetris.BLOCKCOLORS.T
 		};
 		Tetris.Piece.call(this, opt);

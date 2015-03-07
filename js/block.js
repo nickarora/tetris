@@ -14,11 +14,13 @@
 	Tetris.Block.prototype.getSprite = function(){
 		switch(this.color) {
     case 0:
-        return Tetris.bgBlock;
+      return Tetris.bgBlock;
+    case 1:
+    	return Tetris.LBlocks[0];
     case 9:
-        return Tetris.borderBlock;
+      return Tetris.borderBlock;
     default:
-        return Tetris.bgBlock;
+      return Tetris.bgBlock;
 		}
 	};
 

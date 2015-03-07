@@ -3,17 +3,31 @@
 	Tetris.Game = function(canvas){
 		this.ctx = canvas.getContext("2d");
 		this.board = new Tetris.Board({ ctx: this.ctx });
+		this.loadImages();
+	};
 
-		var img = new Image();
-  	img.onload = (function(){
-  		Tetris.initMainTiles(img);
+	Tetris.Game.prototype.loadImages = function(){
+		var LImg = new Image();
+  	LImg.onload = function(){
+  		Tetris.LBlocks = Tetris.initTiles(LImg);
+  	};
+  	LImg.src = "images/block-l.png"
+
+		var mainImg = new Image();
+  	mainImg.onload = (function(){
+  		Tetris.initMainTiles(mainImg);
   		this.play();
   	}).bind(this);
-  	img.src = "images/maintiles.png"
+  	mainImg.src = "images/maintiles.png"
+	};
+
+	Tetris.Game.prototype.generatePiece = function(){
+		var piece = new Tetris.LPiece();
 	};
 
 	Tetris.Game.prototype.play = function() {
 		this.board.draw();
+		this.generatePiece();
 	};
 
 })();
