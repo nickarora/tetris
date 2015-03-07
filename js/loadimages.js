@@ -13,7 +13,8 @@
       x, y, this.width, this.height);
   };
 
-  Tetris.initSprites = function(img) {
+  Tetris.initMainTiles = function(img) {
+    Tetris.borderBlock = new Tetris.Sprite(img, 0, 0, Tetris.TILESIZE, Tetris.TILESIZE);
     Tetris.bgBlock = new Tetris.Sprite(img, 16, 0, Tetris.TILESIZE, Tetris.TILESIZE);
   };
 

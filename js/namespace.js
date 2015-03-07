@@ -17,5 +17,7 @@
 	  'SQUARE'	: '6',
 	  'T'				: '7'
   };
+
+  Tetris.BORDER_BLOCK = 9;
 	
 })();

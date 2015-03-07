@@ -6,7 +6,7 @@
 
 		var img = new Image();
   	img.onload = (function(){
-  		Tetris.initSprites(img);
+  		Tetris.initMainTiles(img);
   		this.play();
   	}).bind(this);
   	img.src = "images/maintiles.png"
