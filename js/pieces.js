@@ -1,6 +1,6 @@
 (function(){
 
-	Tetris.LinePiece = function(){
+	Tetris.LinePiece = function(ctx){
 		this.shapes = [
 	    [[0,0,0,0],
 	     [0,0,0,0],
@@ -14,12 +14,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.LINE
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.SquarePiece = function(){
+	Tetris.SquarePiece = function(ctx){
 		this.shapes = [
 			[[1,1],
 			 [1,1]]
@@ -28,12 +29,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.SQUARE
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.ZPiece = function(){
+	Tetris.ZPiece = function(ctx){
 		this.shapes = [
       [[1,1,0],
        [0,1,1]],
@@ -45,12 +47,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.Z
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.SPiece = function(){
+	Tetris.SPiece = function(ctx){
 
 		this.shapes = [
 		 	[[0,1,1],
@@ -63,12 +66,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.S
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.LPiece = function(){
+	Tetris.LPiece = function(ctx){
 		this.shapes = [
       [[0,0,0],
        [1,1,1],
@@ -87,12 +91,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.L
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.JPiece = function(){
+	Tetris.JPiece = function(ctx){
 		this.shapes = [
       [[0,0,0],
        [1,1,1],
@@ -111,12 +116,13 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.J
 		};
 		Tetris.Piece.call(this, opt);
 	}
 
-	Tetris.TPiece = function(){
+	Tetris.TPiece = function(ctx){
 		this.shapes = [
       [[0,0,0],
        [1,1,1],
@@ -135,6 +141,7 @@
 		var opt = { 
 			x: 4, 
 			y: 2,
+			ctx: ctx,
 			color: Tetris.BLOCKCOLORS.T
 		};
 		Tetris.Piece.call(this, opt);

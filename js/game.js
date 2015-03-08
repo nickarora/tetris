@@ -23,13 +23,13 @@
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
-		this.curPiece = new Tetris.LPiece();
-		this.board.add(this.curPiece);
+		this.curPiece = new Tetris.LPiece(this.ctx);
 	};
 
 	Tetris.Game.prototype.play = function() {
 		this.generatePiece();
 		this.board.draw();
+		this.curPiece.draw();
 	};
 
 })();
