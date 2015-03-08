@@ -39,18 +39,6 @@
 		}
 	};
 
-	Tetris.Board.prototype.remove = function(piece) {
-		var curShape = piece.shapes[piece.current]
-
-		for (var row = 0; row < curShape.length; row++){
-			for (var col = 0; col < curShape[row].length; col++ ) {
-				if (curShape[row][col]) {	
-					this.clear( col + piece.x, row + piece.y);
-				}
-			}
-		}
-	};
-
 	Tetris.Board.prototype.initBorders = function(){
 		for(var x = 0; x < Tetris.BOARD_WIDTH; x++ ){
 			this.set(x, Tetris.BOARD_HEIGHT - 1, Tetris.BORDER_BLOCK);

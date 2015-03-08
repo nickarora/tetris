@@ -23,5 +23,22 @@
   Tetris.BORDER_BLOCK = 9;
 
   Tetris.LBlocks = [];
+  Tetris.JBlocks = [];
+  Tetris.LineBlocks = [];
+  Tetris.SquareBlocks = [];
+  Tetris.ZBlocks = [];
+  Tetris.SBlocks = [];
+  Tetris.TBlocks = [];
+
+  /* Key Codes */
+  Tetris.LEFT = 37;
+  Tetris.UP = 38;
+  Tetris.RIGHT = 39;
+  Tetris.DOWN = 40;
+  Tetris.Z = 122;
+  Tetris.X = 120;
+
+  /* Speeds */
+  Tetris.LEVEL1 = 120;
 	
 })();

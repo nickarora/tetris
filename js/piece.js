@@ -21,5 +21,19 @@
 			}
 		}
 	};
+
+	Tetris.Piece.prototype.rotateRight = function() {
+		this.current++;
+		if (this.current >= this.shapes.length) { this.current = 0; }
+	}
+
+	Tetris.Piece.prototype.rotateLeft = function() {
+		this.current--;
+		if (this.current < 0) { this.current = this.shapes.length - 1; }
+	}
+
+	Tetris.Piece.prototype.move = function() {
+		this.y++;
+	}
 	
 })();
