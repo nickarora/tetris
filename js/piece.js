@@ -4,6 +4,7 @@
 		this.x = opt.x;
 		this.y = opt.y;
 		this.ctx = opt.ctx;
+		this.board = opt.board;
 		this.color = opt.color;
 		this.current = 0;
 	};
@@ -23,17 +24,56 @@
 	};
 
 	Tetris.Piece.prototype.rotateRight = function() {
-		this.current++;
-		if (this.current >= this.shapes.length) { this.current = 0; }
+		var newShape = this.current + 1;
+		if (newShape >= this.shapes.length) { newShape = 0; }
+		if (this.checkCollision(this.x, this.y, newShape)){
+			this.current = newShape;
+		}
 	}
 
 	Tetris.Piece.prototype.rotateLeft = function() {
-		this.current--;
-		if (this.current < 0) { this.current = this.shapes.length - 1; }
+		var newShape = this.current - 1;
+		if (newShape < 0) { newShape = this.shapes.length - 1; }
+		if (this.checkCollision(this.x, this.y, newShape)){
+			this.current = newShape;
+		}
 	}
 
 	Tetris.Piece.prototype.move = function() {
-		this.y++;
+		if (this.checkCollision(this.x, this.y + 1, this.current)){
+			this.y++;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	Tetris.Piece.prototype.moveLeft = function() {
+		if (this.checkCollision(this.x - 1, this.y, this.current)){
+			this.x--;	
+		}
+	}
+
+	Tetris.Piece.prototype.moveRight = function() {
+		if (this.checkCollision(this.x + 1, this.y, this.current)){
+			this.x++;
+		}
+	}
+
+	Tetris.Piece.prototype.checkCollision = function(x,y,cur){
+		var testShape = this.shapes[cur]
+
+		for (var row = 0; row < testShape.length; row++){
+			for (var col = 0; col < testShape[row].length; col++ ) {
+				if (testShape[row][col]) {	
+					if (this.board.get(col + x, row + y).color){
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 	
 })();

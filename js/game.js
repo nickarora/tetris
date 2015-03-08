@@ -10,7 +10,7 @@
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
-		this.curPiece = new Tetris.LPiece(this.ctx);
+		this.curPiece = new Tetris.LPiece(this.ctx, this.board);
 	};
 
 	Tetris.Game.prototype.menu = function() {
@@ -38,14 +38,20 @@
 
 	Tetris.Game.prototype.play = function() {
 		this.frameCounter++;
-		if (this.frameCounter > 600) { this.frameCounter = 1; }
+		if (this.frameCounter > 60) { this.frameCounter = 1; }
 
 		this.board.draw();
 		this.curPiece.draw();
 		this.keyHandler();
 
+		var canMove = true;
 		if ( this.frameCounter % this.speed == 0 ) { 
-			this.curPiece.move();
+			canMove = this.curPiece.move();
+		}
+
+		if (!canMove){
+			this.board.add(this.curPiece);
+			this.generatePiece();
 		}
 
 		requestAnimationFrame(this.play.bind(this));
@@ -59,9 +65,9 @@
 			} else if (key == Tetris.X) {
 				this.curPiece.rotateRight();
 			} else if (key == Tetris.LEFT){
-				this.curPiece.x--;
+				this.curPiece.moveLeft();
 			} else if (key == Tetris.RIGHT){
-				this.curPiece.x++;
+				this.curPiece.moveRight();
 			}
 		}
 

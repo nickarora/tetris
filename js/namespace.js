@@ -39,6 +39,6 @@
   Tetris.X = 120;
 
   /* Speeds */
-  Tetris.LEVEL1 = 120;
+  Tetris.LEVEL1 = 60;
 	
 })();
