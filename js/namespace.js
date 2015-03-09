@@ -39,6 +39,7 @@
   Tetris.X = 120;
 
   /* Speeds */
+  Tetris.FASTMOVE = 3;
   Tetris.LEVEL1 = 30;
 	
 })();

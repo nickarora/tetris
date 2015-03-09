@@ -6,6 +6,8 @@
 		this.curPiece = null;
 		this.loadImages();
 
+		this.fastmove = false;
+		this.fastmoveEnabled = true;
 		this.keysDown = {};
 	};
 
@@ -55,6 +57,10 @@
     });
 
     $(window).keyup(function(event){
+    	if (event.keyCode == Tetris.DOWN) { 
+    		that.fastmove = false;
+    		that.fastmoveEnabled = true; 
+    	}
       delete that.keysDown[event.keyCode];
     });
   };
@@ -67,18 +73,37 @@
 		this.curPiece.draw();
 		this.keyHandler();
 
-		var canMove = true;
-		if ( this.frameCounter % this.speed == 0 ) { 
-			canMove = this.curPiece.move();
-		}
-
-		if (!canMove){
-			this.board.add(this.curPiece);
-			this.board.update();
-			this.generatePiece();
+		if (this.fastmove) {
+			if ( this.frameCounter % Tetris.FASTMOVE == 0 ) { 
+				this.attemptBlockMove();
+			}
+		} else {
+			if ( this.frameCounter % this.speed == 0 ) { 
+				this.attemptBlockMove();
+			}
 		}
 		
 		requestAnimationFrame(this.play.bind(this));
+	};
+
+	Tetris.Game.prototype.attemptBlockMove = function() {
+		var canMove = true;
+		canMove = this.curPiece.move();
+		if (!canMove){ 
+			this.landBlock(); 
+			return false;
+		}
+
+		return true;
+	};
+
+	Tetris.Game.prototype.landBlock = function() {
+		this.board.add(this.curPiece);
+		this.board.update();
+		this.generatePiece();
+		
+		this.fastmove = false;
+		this.fastmoveEnabled = false;
 	};
 
 	Tetris.Game.prototype.keyHandler = function(){
@@ -88,10 +113,14 @@
 				this.curPiece.rotateLeft();
 			} else if (key == Tetris.X) {
 				this.curPiece.rotateRight();
+			} else if (key == Tetris.UP){
+				this.curPiece.rotateRight();
 			} else if (key == Tetris.LEFT){
 				this.curPiece.moveLeft();
 			} else if (key == Tetris.RIGHT){
 				this.curPiece.moveRight();
+			} else if (key == Tetris.DOWN && this.fastmoveEnabled){
+				this.fastmove = true;
 			}
 		}
 
