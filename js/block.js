@@ -11,7 +11,7 @@
 	};
 
 	Tetris.Block.prototype.getSprite = function(){
-		switch(this.color) {
+	switch(this.color) {
     case 0:
       return Tetris.bgBlock;
     case 1:

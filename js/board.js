@@ -58,4 +58,25 @@
 		}
 	};
 
+	Tetris.Board.prototype.update = function() {
+		for (var row = 0; row < Tetris.BOARD_HEIGHT - 1; row++){
+			var complete = true
+			for (var col = 1; col < Tetris.BOARD_WIDTH - 1; col++){
+				if (!this.get(col, row).color) {
+					complete = false;
+				}
+			}
+
+			if (complete) { this.remove(row); }
+		}
+	};
+
+	Tetris.Board.prototype.remove = function(row) {
+		for (var y = row; y >= 1; y--){
+			for (var x = 1; x < Tetris.BOARD_WIDTH - 1; x++){
+				this.set(x,y, this.get(x,y - 1).color)
+			}
+		}
+	};
+
 })();

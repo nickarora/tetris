@@ -11,7 +11,6 @@
 
 	Tetris.Game.prototype.generatePiece = function(){
 		selected = Math.floor(Math.random()*7);
-		debugger
 		switch(selected){
 			case 0:
 			this.curPiece = new Tetris.LPiece(this.ctx, this.board);
@@ -75,9 +74,10 @@
 
 		if (!canMove){
 			this.board.add(this.curPiece);
+			this.board.update();
 			this.generatePiece();
 		}
-
+		
 		requestAnimationFrame(this.play.bind(this));
 	};
 
