@@ -10,7 +10,31 @@
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
-		this.curPiece = new Tetris.LPiece(this.ctx, this.board);
+		selected = Math.floor(Math.random()*7);
+		debugger
+		switch(selected){
+			case 0:
+			this.curPiece = new Tetris.LPiece(this.ctx, this.board);
+			break;
+			case 1:
+			this.curPiece = new Tetris.JPiece(this.ctx, this.board);
+			break;
+			case 2:
+			this.curPiece = new Tetris.LinePiece(this.ctx, this.board);
+			break;
+			case 3:
+			this.curPiece = new Tetris.SPiece(this.ctx, this.board);
+			break;
+			case 4:
+			this.curPiece = new Tetris.ZPiece(this.ctx, this.board);
+			break;
+			case 5:
+			this.curPiece = new Tetris.SquarePiece(this.ctx, this.board);
+			break;
+			case 6:
+			this.curPiece = new Tetris.TPiece(this.ctx, this.board);
+			break;
+		}
 	};
 
 	Tetris.Game.prototype.menu = function() {
