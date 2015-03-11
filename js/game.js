@@ -42,7 +42,7 @@
 		this.bindListeners();
 		this.generatePiece();
 		this.speed = Tetris.LEVEL1;
-		this.frameCounter = 0;
+		this.moveCounter = 0;
 		requestAnimationFrame(this.play.bind(this));
 	};
 
@@ -59,26 +59,27 @@
     $(window).keyup(function(event){
     	if (event.keyCode == Tetris.DOWN) { 
     		that.fastmove = false;
-    		that.fastmoveEnabled = true; 
+    		that.fastmoveEnabled = true;
+    		this.moveCounter = 0; 
     	}
       delete that.keysDown[event.keyCode];
     });
   };
 
 	Tetris.Game.prototype.play = function() {
-		this.frameCounter++;
-		if (this.frameCounter > 60) { this.frameCounter = 1; }
+		this.moveCounter++;
+		if (this.moveCounter > 60) { this.moveCounter = 1; }
 
 		this.board.draw();
 		this.curPiece.draw();
 		this.keyHandler();
 
 		if (this.fastmove) {
-			if ( this.frameCounter % Tetris.FASTMOVE == 0 ) { 
+			if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
 				this.attemptBlockMove();
 			}
 		} else {
-			if ( this.frameCounter % this.speed == 0 ) { 
+			if ( this.moveCounter % this.speed == 0 ) { 
 				this.attemptBlockMove();
 			}
 		}

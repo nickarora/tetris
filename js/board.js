@@ -34,6 +34,7 @@
 			for (var col = 0; col < curShape[row].length; col++ ) {
 				if (curShape[row][col]) {	
 					this.set( col + piece.x, row + piece.y, piece.color);
+					this.get( col + piece.x, row + piece.y).counter = 12;
 				}
 			}
 		}
