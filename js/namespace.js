@@ -41,5 +41,13 @@
   /* Speeds */
   Tetris.FASTMOVE = 3;
   Tetris.LEVEL1 = 30;
+
+  /* Particles */
+
+  Tetris.BP_DURATION = 32;
+
+  /* Animations */
+
+  Tetris.FLASH_DURATION = 4 * 4;
 	
 })();

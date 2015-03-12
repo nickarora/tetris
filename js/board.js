@@ -3,6 +3,7 @@
 	Tetris.Board = function(opt){
 
 		this.ctx = opt.ctx;
+		this.particles = opt.particles;
 
 		this.grid = new Array(Tetris.BOARD_HEIGHT);
 		for(var row = 0; row < Tetris.BOARD_HEIGHT; row++) {
@@ -34,7 +35,7 @@
 			for (var col = 0; col < curShape[row].length; col++ ) {
 				if (curShape[row][col]) {	
 					this.set( col + piece.x, row + piece.y, piece.color);
-					this.get( col + piece.x, row + piece.y).counter = 12;
+					this.get( col + piece.x, row + piece.y).counter = Tetris.FLASH_DURATION;
 				}
 			}
 		}
@@ -68,7 +69,10 @@
 				}
 			}
 
-			if (complete) { this.remove(row); }
+			if (complete) { 
+				this.remove(row); 
+				this.particles.removeBlockEmitters();
+			}
 		}
 	};
 

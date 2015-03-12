@@ -16,7 +16,7 @@
     Tetris.Block.prototype.updateState = function(){
         if ( this.counter > 0) { this.counter--; }
         
-        this.state = Math.floor(this.counter/3);
+        this.state = Math.floor(this.counter/(Tetris.FLASH_DURATION/4));
     };
 
 	Tetris.Block.prototype.getSprite = function(){

@@ -2,13 +2,16 @@
 
 	Tetris.Game = function(canvas){
 		this.ctx = canvas.getContext("2d");
-		this.board = new Tetris.Board({ ctx: this.ctx });
+		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
+		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles });
 		this.curPiece = null;
 		this.loadImages();
 
 		this.fastmove = false;
 		this.fastmoveEnabled = true;
 		this.keysDown = {};
+
+		
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
@@ -72,6 +75,7 @@
 
 		this.board.draw();
 		this.curPiece.draw();
+		this.particles.draw();
 		this.keyHandler();
 
 		if (this.fastmove) {
@@ -100,6 +104,8 @@
 
 	Tetris.Game.prototype.landBlock = function() {
 		this.board.add(this.curPiece);
+		if (this.fastmove) { this.particles.add(this.curPiece); }
+		
 		this.board.update();
 		this.generatePiece();
 		
