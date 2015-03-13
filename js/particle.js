@@ -27,13 +27,13 @@
     this.canvasHelper.draw();
   };
 
-  Tetris.ParticleEffects.prototype.addBlockEmitters = function(row, cols){
+  Tetris.ParticleEffects.prototype.addBlockEmitters = function(positions){
     this.removeBlockEmitters();
     this.initBlockConfig(); 
 
     var e = 0;
-    for (var i=0; i < cols.length; i++){
-      this.addBlockEmitter(cols[i], row, e);
+    for (var i=0; i < positions.length; i++){
+      this.addBlockEmitter(positions[i][1], positions[i][0], e);
       e++;
     }
 
@@ -48,28 +48,19 @@
 
   Tetris.ParticleEffects.prototype.add = function(piece){
     var curShape = piece.shapes[piece.current]
-    var topRow = -1;
-    var topCols = [];
+    var positions = []
 
     for (var row = 0; row < curShape.length; row++){
       for (var col = 0; col < curShape[row].length; col++ ) {
-        if (topRow >= 0 && topRow < row) { break; }
-
-        if (topRow >= 0 && curShape[row][col]){
-          topCols.push(col + piece.x);
+        if (row == 0 && curShape[row][col]) {
+          positions.push([row + piece.y, col + piece.x])
+        } else if (row && !curShape[row-1][col] && curShape[row][col]) {
+          positions.push([row + piece.y, col + piece.x])
         }
-        
-        if (topRow < 0 && curShape[row][col]) { 
-          topRow = row; 
-          topCols.push(col + piece.x);
-        }
-        
       }
     }
 
-    topRow += piece.y;
-
-    this.addBlockEmitters(topRow, topCols);
+    this.addBlockEmitters(positions);
   };
 
   Tetris.ParticleEffects.prototype.removeBlockEmitters = function(){
