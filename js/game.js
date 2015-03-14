@@ -70,21 +70,24 @@
   };
 
 	Tetris.Game.prototype.play = function() {
-		this.moveCounter++;
-		if (this.moveCounter > 60) { this.moveCounter = 1; }
-
+		
 		this.board.draw();
-		this.curPiece.draw();
-		this.particles.draw();
-		this.keyHandler();
 
-		if (this.fastmove) {
-			if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
-				this.attemptBlockMove();
-			}
-		} else {
-			if ( this.moveCounter % this.speed == 0 ) { 
-				this.attemptBlockMove();
+		if (!this.board.exploding()){
+			this.curPiece.draw();
+			this.particles.draw();
+			this.moveCounter++;
+			if (this.moveCounter > 60) { this.moveCounter = 1; }		
+			this.keyHandler();
+
+			if (this.fastmove) {
+				if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
+					this.attemptBlockMove();
+				}
+			} else {
+				if ( this.moveCounter % this.speed == 0 ) { 
+					this.attemptBlockMove();
+				}
 			}
 		}
 		

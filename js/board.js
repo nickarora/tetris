@@ -14,6 +14,7 @@
 		}
 
 		this.initBorders();
+		this.completed = [];
 	};
 
 	Tetris.Board.prototype.clear = function(x,y){
@@ -53,6 +54,8 @@
 	};
 
 	Tetris.Board.prototype.draw = function() {
+		if (!this.exploding()) { this.removeCompletedRows(); }
+		
 		for(var y = 0; y < Tetris.BOARD_HEIGHT; y++){
 			for(var x = 0; x < Tetris.BOARD_WIDTH; x++){
 				this.get(x,y).draw(x,y, this.ctx);
@@ -61,6 +64,8 @@
 	};
 
 	Tetris.Board.prototype.update = function() {
+		completed = []
+
 		for (var row = 0; row < Tetris.BOARD_HEIGHT - 1; row++){
 			var complete = true
 			for (var col = 1; col < Tetris.BOARD_WIDTH - 1; col++){
@@ -68,12 +73,46 @@
 					complete = false;
 				}
 			}
+			if (complete) { completed.push(row) }
+		}
 
-			if (complete) { 
-				this.remove(row); 
-				this.particles.removeBlockEmitters();
+		if (completed.length){
+			this.animateCompletedRows(completed);
+		}
+
+	};
+
+	Tetris.Board.prototype.animateCompletedRows = function(completed) {
+		this.particles.removeBlockEmitters();
+
+		for(i=0; i < completed.length; i++){
+			y = completed[i];
+
+			for(x=0; x < Tetris.BOARD_WIDTH - 1; x++){
+				this.get(x, y).explodeAnimation = true;
+				this.get(x, y).counter = Tetris.FLASH_DURATION;
+			}	
+		}
+
+		this.completed = this.completed.concat(completed);
+	};
+
+	Tetris.Board.prototype.removeCompletedRows = function(){
+		for(i=0; i < this.completed.length; i++){
+			this.remove(this.completed[i]); 	
+		}
+
+		this.completed = [];
+	};
+
+	Tetris.Board.prototype.exploding = function(){
+		for (var y = Tetris.BOARD_HEIGHT - 2; y >= 0; y--){
+			for (var x = 1; x < Tetris.BOARD_WIDTH - 1; x++){
+				if (this.get(x, y).explodeAnimation) { return true; }
 			}
 		}
+
+		return false;
 	};
 
 	Tetris.Board.prototype.remove = function(row) {
