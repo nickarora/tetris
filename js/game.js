@@ -9,9 +9,7 @@
 
 		this.fastmove = false;
 		this.fastmoveEnabled = true;
-		this.keysDown = {};
-
-		
+		this.keysDown = {};		
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
@@ -72,10 +70,10 @@
 	Tetris.Game.prototype.play = function() {
 		
 		this.board.draw();
+		this.particles.draw();
 
 		if (!this.board.exploding()){
 			this.curPiece.draw();
-			this.particles.draw();
 			this.moveCounter++;
 			if (this.moveCounter > 60) { this.moveCounter = 1; }		
 			this.keyHandler();
@@ -101,7 +99,6 @@
 			this.landBlock(); 
 			return false;
 		}
-
 		return true;
 	};
 

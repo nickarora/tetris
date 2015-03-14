@@ -8,6 +8,9 @@
     this.blockConfig = new Array(4);
     this.initBlockConfig();
 
+    this.explodeConfig = new Array(4);
+    this.initExplodeConfig();
+
     this.blockCount = 0;
   }
 
@@ -17,14 +20,38 @@
     }
   };
 
+  Tetris.ParticleEffects.prototype.initExplodeConfig = function(){
+    for(var i = 0; i < 4; i++){
+      this.explodeConfig[i] = [{"pos":{"x":0,"y":0},"posVar":{"x":160,"y":16},"speed":20,"speedVar":0,"angle":90,"angleVar":20,"life":1,"lifeVar":0,"radius":10,"radiusVar":0,"textureAdditive":false,"startScale":2.5,"startScaleVar":0,"endScale":2.5,"endScaleVar":0,"startColor":[255,255,255,.4],"startColorVar":[0,0,0,0],"endColor":[0,0,0,0],"endColorVar":[0,0,0,0],"colorList":[],"gravity":{"x":0,"y":500},"radialAccel":0,"radialAccelVar":0,"tangentialAccel":0,"tangentialAccelVar":0,"texture":"./images/particle.png","totalParticles":50,"emissionRate":250,"xEquation":"","yEquation":"","textureEnabled":false,"active":true,"duration":null,"cycles":1, "id":"rowexplode","aFactor":{"x":0,"y":0},"xFactor":{"x":0,"y":0},"border":{"top":400,"left":200,"bottom":200,"right":200},"zIndex":1}]
+    }
+  }
+
   Tetris.ParticleEffects.prototype.updateState = function(){
     if ( this.blockCount > 0) { this.blockCount--; }
-    if (!this.blockCount){ this.removeBlockEmitters(); };
+    if (!this.blockCount && this.canvasHelper.emitters.length){ 
+      this.removeBlockEmitters(); };
   }
 
   Tetris.ParticleEffects.prototype.draw = function(){
     this.updateState();
     this.canvasHelper.draw();
+  };
+
+  Tetris.ParticleEffects.prototype.addExplosions = function(rows){
+    this.removeBlockEmitters();
+    this.initExplodeConfig();
+
+    var e = 0;
+    for (var i=0; i < rows.length; i++){
+      this.addExplosion(i,e)
+      e++;
+    }
+  };
+
+  Tetris.ParticleEffects.prototype.addExplosion = function(row, e){    
+    var px = Tetris.TILESIZE;
+    var py = y * Tetris.TILESIZE;
+    this.canvasHelper.loadSystem(this.explodeConfig[e], px, py);
   };
 
   Tetris.ParticleEffects.prototype.addBlockEmitters = function(positions){

@@ -35,4 +35,4 @@
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
         };
-}());
+})();

@@ -54,7 +54,9 @@
 	};
 
 	Tetris.Board.prototype.draw = function() {
-		if (!this.exploding()) { this.removeCompletedRows(); }
+		if (!this.exploding() && this.completed.length) { 
+			this.removeCompletedRows(); 
+		}
 		
 		for(var y = 0; y < Tetris.BOARD_HEIGHT; y++){
 			for(var x = 0; x < Tetris.BOARD_WIDTH; x++){
@@ -102,6 +104,8 @@
 			this.remove(this.completed[i]); 	
 		}
 
+		this.particles.addExplosions(this.completed);
+		this.particles.blockCount = Tetris.FLASH_DURATION * 2;
 		this.completed = [];
 	};
 
