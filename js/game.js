@@ -58,10 +58,10 @@
     });
 
     $(window).keyup(function(event){
-    	if (event.keyCode == Tetris.DOWN) { 
+    	if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.DROP) { 
     		that.fastmove = false;
     		that.fastmoveEnabled = true;
-    		this.moveCounter = 0; 
+    		that.moveCounter = 0; 
     	}
       delete that.keysDown[event.keyCode];
     });
@@ -102,15 +102,21 @@
 		return true;
 	};
 
+	Tetris.Game.prototype.dropBlock = function(){
+		this.curPiece.drop();
+		this.landBlock();
+	}
+
 	Tetris.Game.prototype.landBlock = function() {
 		this.board.add(this.curPiece);
-		if (this.fastmove) { this.particles.add(this.curPiece); }
+		if (this.fastmove) { 
+			this.particles.add(this.curPiece); 
+			this.fastmove = false;
+			this.fastmoveEnabled = false;
+		}
 		
 		this.board.update();
 		this.generatePiece();
-		
-		this.fastmove = false;
-		this.fastmoveEnabled = false;
 	};
 
 	Tetris.Game.prototype.keyHandler = function(){
@@ -128,6 +134,9 @@
 				this.curPiece.moveRight();
 			} else if (key == Tetris.DOWN && this.fastmoveEnabled){
 				this.fastmove = true;
+			} else if (key == Tetris.DROP && this.fastmoveEnabled){
+				this.fastmove = true;
+				this.dropBlock();
 			}
 		}
 

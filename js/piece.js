@@ -52,6 +52,11 @@
 		}
 	}
 
+	Tetris.Piece.prototype.drop = function() {
+		var lowest = this.locateLowest();
+		this.y = lowest[1];
+	}
+
 	Tetris.Piece.prototype.moveLeft = function() {
 		if (this.checkCollision(this.x - 1, this.y, this.current)){
 			this.x--;	
