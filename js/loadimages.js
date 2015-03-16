@@ -13,6 +13,13 @@
       x, y, this.width, this.height);
   };
 
+  Tetris.Sprite.prototype.drawTransparent = function(ctx, x, y) {
+    ctx.globalAlpha = 0.3;
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
+      x, y, this.width, this.height);
+    ctx.globalAlpha = 1;
+  };
+
   Tetris.initTiles = function(img) {
     arr = [
       new Tetris.Sprite(img, 0, 0, Tetris.TILESIZE, Tetris.TILESIZE),

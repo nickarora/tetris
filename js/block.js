@@ -2,16 +2,21 @@
 
 	Tetris.Block = function(opt) {
 		this.color = opt.color;
-        this.state = 0;
-        this.counter = 0;
-        this.explodeAnimation = false;
+    this.state = 0;
+    this.counter = 0;
+    this.explodeAnimation = false;
+    this.shadow = opt.shadow || false;
 	};
 
 	Tetris.Block.prototype.draw = function(x, y, ctx) {
 		var px = x * Tetris.TILESIZE;
 		var py = y * Tetris.TILESIZE;
-        this.updateState();
-		this.getSprite().draw(ctx, px, py);
+    this.updateState();
+    if (!this.shadow){
+		  this.getSprite().draw(ctx, px, py);
+    } else {
+      this.getSprite().drawTransparent(ctx, px, py);
+    }
 	};
 
   Tetris.Block.prototype.updateState = function(){

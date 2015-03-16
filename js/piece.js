@@ -10,17 +10,21 @@
 	};
 
 	Tetris.Piece.prototype.draw = function() {
-
 		var curShape = this.shapes[this.current]
+		var shadow = this.locateLowest();
 
 		for (var row = 0; row < curShape.length; row++){
 			for (var col = 0; col < curShape[row].length; col++ ) {
 				if (curShape[row][col]) {	
 					var block = new Tetris.Block({ color: this.color })
+					var shadowBlock = new Tetris.Block({ color: this.color, shadow: true })
+					
+					shadowBlock.draw(col + shadow[0], row + shadow[1], this.ctx);	
 					block.draw(col + this.x, row + this.y, this.ctx);
 				}
 			}
 		}
+
 	};
 
 	Tetris.Piece.prototype.rotateRight = function() {
@@ -61,10 +65,12 @@
 	}
 
 	Tetris.Piece.prototype.checkCollision = function(x,y,cur){
-		var testShape = this.shapes[cur]
+		var testShape = this.shapes[cur];
 
 		for (var row = 0; row < testShape.length; row++){
 			for (var col = 0; col < testShape[row].length; col++ ) {
+				if (col + x > Tetris.BOARD_WIDTH - 1) { continue; }
+				if (row + y > Tetris.BOARD_HEIGHT - 1) { continue; }
 				if (testShape[row][col]) {	
 					if (this.board.get(col + x, row + y).color){
 						return false;
@@ -74,6 +80,34 @@
 		}
 
 		return true;
+	};
+
+	Tetris.Piece.prototype.height = function(){
+		var testShape = this.shapes[this.current]
+		var height = 0;
+		
+		for(var y = 0; y < testShape.length; y++){
+			if (testShape[y].indexOf(1) != -1) { height++; }
+		}
+		return height;
+	};
+
+	Tetris.Piece.prototype.locateLowest = function(){
+
+		var testShape = this.shapes[this.current]
+		var lowestRow = Tetris.BOARD_HEIGHT - 1 - this.height();
+
+		hitY = null;
+
+		for (var y = this.y+1; y <= lowestRow; y++){
+			if (!this.checkCollision(this.x, y, this.current)){
+				hitY = y - 1;
+				break;
+			}
+			hitY = y;
+		}
+
+		return [this.x, hitY];
 	}
 	
 })();
