@@ -20,6 +20,10 @@
     ctx.globalAlpha = 1;
   };
 
+  Tetris.initBG = function(img) {
+    Tetris.bg = new Tetris.Sprite(img, 0, 0, 304, 320);
+  };
+
   Tetris.initTiles = function(img) {
     arr = [
       new Tetris.Sprite(img, 0, 0, Tetris.TILESIZE, Tetris.TILESIZE),

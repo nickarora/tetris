@@ -4,6 +4,7 @@
 		
 		var blocks = Array.apply(null, Array(7)).map(function() { return new Image() });
 		var mainImg = new Image();
+		var bgImg = new Image();
 
 		blocks[0].src = "images/block-l.png"
 		blocks[1].src = "images/block-j.png"
@@ -13,6 +14,7 @@
 		blocks[5].src = "images/block-square.png"
 		blocks[6].src = "images/block-t.png"
 		mainImg.src = "images/maintiles.png"
+		bgImg.src = "images/bg.png"
 
 		for ( var i = 0; i < blocks.length; i++ ){
 			blocks[i].onload = function(e) {
@@ -41,6 +43,10 @@
 				}
   		};
 		}
+
+  	bgImg.onload = (function(){
+  		Tetris.initBG(bgImg);
+  	}).bind(this);
   	
   	mainImg.onload = (function(){
   		Tetris.initMainTiles(mainImg);

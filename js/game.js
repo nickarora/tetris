@@ -69,6 +69,7 @@
 
 	Tetris.Game.prototype.play = function() {
 		
+		this.clearBg();
 		this.board.draw();
 		this.particles.draw();
 
@@ -90,6 +91,10 @@
 		}
 		
 		requestAnimationFrame(this.play.bind(this));
+	};
+
+	Tetris.Game.prototype.clearBg = function(){
+		Tetris.bg.draw(this.ctx, 0, 0);
 	};
 
 	Tetris.Game.prototype.attemptBlockMove = function() {
