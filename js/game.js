@@ -4,6 +4,7 @@
 		this.ctx = canvas.getContext("2d");
 		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
 		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles });
+		this.nextPiece = null;
 		this.curPiece = null;
 		this.loadImages();
 
@@ -16,32 +17,40 @@
 		selected = Math.floor(Math.random()*7);
 		switch(selected){
 			case 0:
-			this.curPiece = new Tetris.LPiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.LPiece(this.ctx, this.board);
 			break;
 			case 1:
-			this.curPiece = new Tetris.JPiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.JPiece(this.ctx, this.board);
 			break;
 			case 2:
-			this.curPiece = new Tetris.LinePiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.LinePiece(this.ctx, this.board);
 			break;
 			case 3:
-			this.curPiece = new Tetris.SPiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.SPiece(this.ctx, this.board);
 			break;
 			case 4:
-			this.curPiece = new Tetris.ZPiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.ZPiece(this.ctx, this.board);
 			break;
 			case 5:
-			this.curPiece = new Tetris.SquarePiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.SquarePiece(this.ctx, this.board);
 			break;
 			case 6:
-			this.curPiece = new Tetris.TPiece(this.ctx, this.board);
+			this.nextPiece = new Tetris.TPiece(this.ctx, this.board);
 			break;
 		}
+	};
+
+	Tetris.Game.prototype.getNextPiece = function(){
+		this.curPiece = this.nextPiece;
 	};
 
 	Tetris.Game.prototype.menu = function() {
 		this.bindListeners();
 		this.generatePiece();
+		
+		this.getNextPiece();
+		this.generatePiece();
+
 		this.speed = Tetris.LEVEL1;
 		this.moveCounter = 0;
 		requestAnimationFrame(this.play.bind(this));
@@ -72,6 +81,7 @@
 		this.clearBg();
 		this.board.draw();
 		this.particles.draw();
+		this.nextPiece.preview();
 
 		if (!this.board.exploding()){
 			this.curPiece.draw();
@@ -121,6 +131,7 @@
 		}
 		
 		this.board.update();
+		this.getNextPiece();
 		this.generatePiece();
 	};
 

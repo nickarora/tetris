@@ -11,6 +11,9 @@
 	     [0,1,0]] 
 		];
 
+		this.offsetx = 13.5;
+		this.offsety = 10.5;
+
 		var opt = { 
 			x: 4, 
 			y: 2,
@@ -26,6 +29,9 @@
 			[[1,1],
 			 [1,1]]
 		];
+
+		this.offsetx = 14.5;
+		this.offsety = 12;
 
 		var opt = { 
 			x: 4, 
@@ -46,6 +52,9 @@
        [1,0]]
 		];
 
+		this.offsetx = 14;
+		this.offsety = 12;	
+
 		var opt = { 
 			x: 4, 
 			y: 2,
@@ -65,6 +74,9 @@
 	     [1,1],
 	     [0,1]]
 		];
+
+		this.offsetx = 14;
+		this.offsety = 12;
 
 		var opt = { 
 			x: 4, 
@@ -92,6 +104,9 @@
        [0,1,1]]
 		];
 
+		this.offsetx = 14;
+		this.offsety = 11;
+
 		var opt = { 
 			x: 4, 
 			y: 2,
@@ -118,6 +133,9 @@
        [0,1,0]]
 		];
 
+		this.offsetx = 14;
+		this.offsety = 11;
+
 		var opt = { 
 			x: 4, 
 			y: 2,
@@ -143,6 +161,9 @@
        [0,1,1],
        [0,1,0]]		
 		];
+
+		this.offsetx = 14;
+		this.offsety = 11;
 
 		var opt = { 
 			x: 4, 

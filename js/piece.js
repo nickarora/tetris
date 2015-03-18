@@ -27,6 +27,19 @@
 
 	};
 
+	Tetris.Piece.prototype.preview = function() {
+		var curShape = this.shapes[this.current];
+
+		for (var row = 0; row < curShape.length; row++){
+			for (var col = 0; col < curShape[row].length; col++ ) {
+				if (curShape[row][col]) {	
+					var block = new Tetris.Block({ color: this.color })
+					block.draw(col + this.offsetx, row + this.offsety, this.ctx);
+				}
+			}
+		}
+	};
+
 	Tetris.Piece.prototype.rotateRight = function() {
 		var newShape = this.current + 1;
 		if (newShape >= this.shapes.length) { newShape = 0; }
