@@ -13,6 +13,12 @@
       x, y, this.width, this.height);
   };
 
+  Tetris.Sprite.prototype.drawScale = function(ctx, x, y, scale) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
+      x, y, this.width * scale, this.height * scale);
+  };
+
+
   Tetris.Sprite.prototype.drawTransparent = function(ctx, x, y) {
     ctx.globalAlpha = 0.3;
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height,

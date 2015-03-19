@@ -4,6 +4,7 @@
 
 		this.ctx = opt.ctx;
 		this.particles = opt.particles;
+		this.game = opt.game;
 
 		this.grid = new Array(Tetris.BOARD_HEIGHT);
 		for(var row = 0; row < Tetris.BOARD_HEIGHT; row++) {
@@ -97,6 +98,24 @@
 		}
 
 		this.completed = this.completed.concat(completed);
+		this.updateScore(completed.length);
+	};
+
+	Tetris.Board.prototype.updateScore = function(n){
+		switch(n){
+			case 1:
+				this.game.score += 1;
+				break;
+			case 2:
+				this.game.score += 3;
+				break;
+			case 3:
+				this.game.score += 5;
+				break;
+			case 4:
+				this.game.score += 8;
+				break;
+		}
 	};
 
 	Tetris.Board.prototype.removeCompletedRows = function(){

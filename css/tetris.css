@@ -1,3 +1,12 @@
+@font-face {
+    font-family: eightbit;
+    src: url('../fonts/minecraftia.ttf');
+}
+
+body {
+	background-color: #525a5c;
+}
+
 canvas#main {
 	
 	width: 456px;

@@ -2,15 +2,19 @@
 
 	Tetris.Game = function(canvas){
 		this.ctx = canvas.getContext("2d");
+
 		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
-		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles });
+		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles, game: this });
+
 		this.nextPiece = null;
 		this.curPiece = null;
 		this.loadImages();
 
 		this.fastmove = false;
 		this.fastmoveEnabled = true;
-		this.keysDown = {};		
+		this.keysDown = {};
+
+		this.score = 0;
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
@@ -47,7 +51,7 @@
 	Tetris.Game.prototype.menu = function() {
 		this.bindListeners();
 		this.generatePiece();
-		
+
 		this.getNextPiece();
 		this.generatePiece();
 
@@ -81,6 +85,7 @@
 		this.clearBg();
 		this.board.draw();
 		this.particles.draw();
+		this.showScore();
 		this.nextPiece.preview();
 
 		if (!this.board.exploding()){
@@ -106,6 +111,11 @@
 	Tetris.Game.prototype.clearBg = function(){
 		Tetris.bg.draw(this.ctx, 0, 0);
 	};
+
+	Tetris.Game.prototype.showScore = function(){
+  	var strScore = this.score.toString();
+  	Tetris.BMF.write(strScore, 275, 45, 'eightbit', this.ctx, 'right');
+	}
 
 	Tetris.Game.prototype.attemptBlockMove = function() {
 		var canMove = true;
