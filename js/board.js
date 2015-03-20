@@ -116,6 +116,8 @@
 				this.game.score += 8;
 				break;
 		}
+
+		this.game.updateLevel(n);
 	};
 
 	Tetris.Board.prototype.removeCompletedRows = function(){

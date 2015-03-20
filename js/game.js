@@ -55,7 +55,9 @@
 		this.getNextPiece();
 		this.generatePiece();
 
-		this.speed = Tetris.LEVEL1;
+		this.level = 0;
+		this.nextLevelCount = Tetris.LEVELUP;
+		this.speed = Tetris.LEVEL[this.level];
 		this.moveCounter = 0;
 		requestAnimationFrame(this.play.bind(this));
 	};
@@ -86,6 +88,7 @@
 		this.board.draw();
 		this.particles.draw();
 		this.showScore();
+		this.showLevel();
 		this.nextPiece.preview();
 
 		if (!this.board.exploding()){
@@ -117,6 +120,11 @@
   	Tetris.BMF.write(strScore, 275, 45, 'eightbit', this.ctx, 'right');
 	}
 
+	Tetris.Game.prototype.showLevel = function(){
+  	var strLevel = (this.level + 1).toString();
+  	Tetris.BMF.write(strLevel, 275, 105, 'eightbit', this.ctx, 'right');
+	}
+
 	Tetris.Game.prototype.attemptBlockMove = function() {
 		var canMove = true;
 		canMove = this.curPiece.move();
@@ -143,6 +151,18 @@
 		this.board.update();
 		this.getNextPiece();
 		this.generatePiece();
+	};
+
+	Tetris.Game.prototype.updateLevel = function(n){
+		if (this.level == Tetris.LEVEL.length - 1) { return; }
+
+		this.nextLevelCount -= n;
+
+		if (this.nextLevelCount <= 0){
+			this.nextLevelCount = Tetris.LEVELUP;
+			this.level += 1;
+			this.speed = Tetris.LEVEL[this.level];
+		}
 	};
 
 	Tetris.Game.prototype.keyHandler = function(){
