@@ -3,14 +3,51 @@
     src: url('../fonts/minecraftia.ttf');
 }
 
+* {
+	overflow: hidden;
+}
+
 body {
-	background-color: #525a5c;
+	padding: 0;
+	margin: 0;
+	background-color: #00acaa;
+}
+
+.frame {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 20;
+	bottom: 0;
+	width: 610px;
+	height: 100%;
+	background-image: url('../images/gameboy.png');
+	background-repeat: no-repeat;
+}
+
+.frame::after {
+	content: "";
+	position: absolute;
+	width: 384px;
+	height: 342px;
+	top: 92px;
+	left: 118px;
+	z-index: 1;
+	overflow: hidden;
+
+	background-color: #000;
 }
 
 canvas#main {
-	
-	width: 456px;
-	height: 480px;
+	position: relative;
+
+	width: 325px;
+	height: 342px;
+
+	top: 92px;
+	left: 148px;
+
+	z-index: 2;
 
 	background-color: #000;
 }

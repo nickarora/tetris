@@ -16,7 +16,7 @@
 
   Tetris.ParticleEffects.prototype.initBlockConfig = function(){
     for(var i = 0; i < 4; i++ ){
-      this.blockConfig[i] = [{"pos":{"x":0,"y":0},"posVar":{"x":8,"y":0},"speed":1,"speedVar":0,"angle":0,"angleVar":0,"life":0.7,"lifeVar":0,"radius":4,"radiusVar":0,"textureAdditive":true,"startScale":.5,"startScaleVar":0,"endScale":.5,"endScaleVar":0,"startColor":[66,70,119,.4],"startColorVar":[0,0,0,0],"endColor":[0,0,0,0],"endColorVar":[0,0,0,0],"colorList":[],"gravity":{"x":0,"y":-200},"radialAccel":0,"radialAccelVar":0,"tangentialAccel":0,"tangentialAccelVar":0,"texture":"./images/particle.png","totalParticles":25,"emissionRate":25,"xEquation":"","yEquation":"","textureEnabled":true,"active":true,"duration":null,"id":"landblock","aFactor":{"x":0,"y":0},"xFactor":{"x":0,"y":0}, "zIndex":1}];
+      this.blockConfig[i] = [{"pos":{"x":0,"y":0},"posVar":{"x":8,"y":0},"speed":1,"speedVar":0,"angle":0,"angleVar":0,"life":0.7,"lifeVar":0,"radius":4,"radiusVar":0,"textureAdditive":true,"startScale":.9,"startScaleVar":0,"endScale":.9,"endScaleVar":0,"startColor":[66,70,119,.4],"startColorVar":[0,0,0,0],"endColor":[0,0,0,0],"endColorVar":[0,0,0,0],"colorList":[],"gravity":{"x":0,"y":-200},"radialAccel":0,"radialAccelVar":0,"tangentialAccel":0,"tangentialAccelVar":0,"texture":"./images/particle.png","totalParticles":25,"emissionRate":25,"xEquation":"","yEquation":"","textureEnabled":true,"active":true,"duration":null,"id":"landblock","aFactor":{"x":0,"y":0},"xFactor":{"x":0,"y":0}, "zIndex":1}];
     }
   };
 

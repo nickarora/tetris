@@ -4,11 +4,14 @@
 	<link rel="stylesheet" href="./css/tetris.css">
 </head>
 <body>
-	<canvas id="main"></canvas>
+	<div class='frame'>
+		<canvas id="main" class="zoomtarget" data-closeclick="true"></canvas>
+	</div>
+	
 	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
 	<script src="./lib/EPSY.min.js"></script>
 	<script src="./lib/EPSY.CanvasHelper.js"></script>
-	
+	<script src="./lib/jquery.zoomooz.min.js"></script>
 	<script src="./js/namespace.js"></script>
 	<script src="./js/loadimages.js"></script>
 	<script src="./js/utils.js"></script>
