@@ -15,10 +15,26 @@
 		this.keysDown = {};
 
 		this.score = 0;
+
+		this.history = [
+			Math.floor(Math.random()*7),
+			Math.floor(Math.random()*7),
+			Math.floor(Math.random()*7),
+			Math.floor(Math.random()*7)
+		];
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
-		selected = Math.floor(Math.random()*7);
+		
+		var selected = -1
+
+		while (selected < 0 || this.history.indexOf(selected) >= 0 ){
+			selected = Math.floor(Math.random()*7);	
+		}
+
+		this.history.push(selected);
+		this.history.shift();
+		
 		switch(selected){
 			case 0:
 			this.nextPiece = new Tetris.LPiece(this.ctx, this.board);

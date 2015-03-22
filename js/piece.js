@@ -88,7 +88,7 @@
 		for (var row = 0; row < testShape.length; row++){
 			for (var col = 0; col < testShape[row].length; col++ ) {
 				if (col + x > Tetris.BOARD_WIDTH - 1) { continue; }
-				if (row + y > Tetris.BOARD_HEIGHT - 1) { continue; }
+				if (row + y > Tetris.BOARD_HEIGHT - 1 || row + y < 0) { continue; }
 				if (testShape[row][col]) {	
 					if (this.board.get(col + x, row + y).color){
 						return false;

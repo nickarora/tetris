@@ -16,7 +16,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: -2,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.LINE
@@ -34,8 +34,8 @@
 		this.offsety = 12;
 
 		var opt = { 
-			x: 4, 
-			y: 2,
+			x: 5, 
+			y: 0,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.SQUARE
@@ -57,7 +57,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: 0,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.Z
@@ -80,7 +80,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: 0,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.S
@@ -109,7 +109,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: -1,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.L
@@ -138,7 +138,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: -1,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.J
@@ -167,7 +167,7 @@
 
 		var opt = { 
 			x: 4, 
-			y: 2,
+			y: -1,
 			ctx: ctx,
 			board: board,
 			color: Tetris.BLOCKCOLORS.T
