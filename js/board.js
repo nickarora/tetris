@@ -18,6 +18,16 @@
 		this.completed = [];
 	};
 
+	Tetris.Board.prototype.initBoard = function(){
+		for(var row = 0; row < Tetris.BOARD_HEIGHT; row++) {
+			for(var col = 0; col < Tetris.BOARD_WIDTH; col++) {
+				this.grid[row][col].color = Tetris.EMPTY;
+			}
+		}
+
+		this.initBorders();
+	};
+
 	Tetris.Board.prototype.clear = function(x,y){
 		this.grid[y][x].color = Tetris.EMPTY;
 	}
@@ -35,12 +45,20 @@
 
 		for (var row = 0; row < curShape.length; row++){
 			for (var col = 0; col < curShape[row].length; col++ ) {
-				if (curShape[row][col]) {	
-					this.set( col + piece.x, row + piece.y, piece.color);
-					this.get( col + piece.x, row + piece.y).counter = Tetris.FLASH_DURATION;
+				if (curShape[row][col]) {
+					if ( (row + piece.y) < 0 ) { return false; }
+					
+					if (this.get(col + piece.x, row + piece.y).color == Tetris.EMPTY) {	
+						this.set( col + piece.x, row + piece.y, piece.color);
+						this.get( col + piece.x, row + piece.y).counter = Tetris.FLASH_DURATION;
+					} else {
+						return false;
+					}
 				}
 			}
 		}
+
+		return true;
 	};
 
 	Tetris.Board.prototype.initBorders = function(){

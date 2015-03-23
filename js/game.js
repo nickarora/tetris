@@ -6,15 +6,7 @@
 		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
 		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles, game: this });
 
-		this.nextPiece = null;
-		this.curPiece = null;
 		this.loadImages();
-
-		this.fastmove = false;
-		this.fastmoveEnabled = true;
-		this.keysDown = {};
-
-		this.score = 0;
 
 		this.history = [
 			Math.floor(Math.random()*7),
@@ -22,6 +14,9 @@
 			Math.floor(Math.random()*7),
 			Math.floor(Math.random()*7)
 		];
+
+		this.keysDown = {};
+		this.bindListeners();
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
@@ -65,9 +60,15 @@
 	};
 
 	Tetris.Game.prototype.menu = function() {
-		this.bindListeners();
-		this.generatePiece();
+		this.gameOver = false;
+		this.gameOverCounter = 0;
 
+		this.wipeBg();
+		this.board.initBoard();
+
+		this.nextPiece = null;
+		this.curPiece = null;
+		this.generatePiece();
 		this.getNextPiece();
 		this.generatePiece();
 
@@ -75,6 +76,13 @@
 		this.nextLevelCount = Tetris.LEVELUP;
 		this.speed = Tetris.LEVEL[this.level];
 		this.moveCounter = 0;
+		
+		this.fastmove = false;
+		this.fastmoveEnabled = true;
+		this.keysDown = {};
+
+		this.score = 0;
+
 		requestAnimationFrame(this.play.bind(this));
 	};
 
@@ -100,31 +108,57 @@
 
 	Tetris.Game.prototype.play = function() {
 		
-		this.clearBg();
-		this.board.draw();
-		this.particles.draw();
-		this.showScore();
-		this.showLevel();
-		this.nextPiece.preview();
-
-		if (!this.board.exploding()){
-			this.curPiece.draw();
-			this.moveCounter++;
-			if (this.moveCounter > 60) { this.moveCounter = 1; }		
+		if (!this.gameOver){
+			this.wipeBg();
+			this.clearBg();
+			this.board.draw();
+			this.particles.draw();
+			this.showScore();
+			this.showLevel();
+			this.nextPiece.preview();
 			this.keyHandler();
 
-			if (this.fastmove) {
-				if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
-					this.attemptBlockMove();
-				}
-			} else {
-				if ( this.moveCounter % this.speed == 0 ) { 
-					this.attemptBlockMove();
+			if (!this.board.exploding()){
+				this.curPiece.draw();
+				this.moveCounter++;
+				if (this.moveCounter > 60) { this.moveCounter = 1; }		
+				
+
+				if (this.fastmove) {
+					if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
+						this.attemptBlockMove();
+					}
+				} else {
+					if ( this.moveCounter % this.speed == 0 ) { 
+						this.attemptBlockMove();
+					}
 				}
 			}
+			
+			requestAnimationFrame(this.play.bind(this));
 		}
-		
-		requestAnimationFrame(this.play.bind(this));
+	};
+
+	Tetris.Game.prototype.wipeBg = function() {
+		this.ctx.fillStyle = 'rgba(0,0,0,1)';
+		this.ctx.fillRect(0,0, 304, 320);
+	};
+
+	Tetris.Game.prototype.showGameOver = function(){
+  	if (this.gameOverCounter < 10){
+  		this.gameOverCounter++;
+  		this.ctx.fillStyle = 'rgba(50,11,11,0.1)';
+  		this.ctx.fillRect(0,0, 304, 320);
+  		Tetris.BMF.write("Game", 195, 105, 'bubble', this.ctx, 'right');
+  		Tetris.BMF.write("Over", 195, 150, 'bubble', this.ctx, 'right');
+  	}
+
+  	if (Object.keys(this.keysDown).length > 0) { 
+  		this.menu();
+  		return;
+  	}
+
+  	requestAnimationFrame(this.showGameOver.bind(this));
 	};
 
 	Tetris.Game.prototype.clearBg = function(){
@@ -157,7 +191,11 @@
 	}
 
 	Tetris.Game.prototype.landBlock = function() {
-		this.board.add(this.curPiece);
+		if (!this.board.add(this.curPiece)){
+			this.gameOver = true;
+			this.showGameOver();
+		}
+
 		if (this.fastmove) { 
 			this.particles.add(this.curPiece); 
 			this.fastmove = false;
