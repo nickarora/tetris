@@ -5,9 +5,7 @@
 
 		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
 		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles, game: this });
-
-		this.loadImages();
-
+	
 		this.history = [
 			Math.floor(Math.random()*7),
 			Math.floor(Math.random()*7),
@@ -17,6 +15,9 @@
 
 		this.keysDown = {};
 		this.bindListeners();
+		this.menu = new Tetris.Menu({game: this});
+
+		this.loadImages();
 	};
 
 	Tetris.Game.prototype.generatePiece = function(){
@@ -59,7 +60,7 @@
 		this.curPiece = this.nextPiece;
 	};
 
-	Tetris.Game.prototype.menu = function() {
+	Tetris.Game.prototype.initNewGame = function(){
 		this.gameOver = false;
 		this.gameOverCounter = 0;
 
@@ -109,7 +110,6 @@
 	Tetris.Game.prototype.play = function() {
 		
 		if (!this.gameOver){
-			this.wipeBg();
 			this.clearBg();
 			this.board.draw();
 			this.particles.draw();
@@ -153,8 +153,9 @@
   		Tetris.BMF.write("Over", 195, 150, 'bubble', this.ctx, 'right');
   	}
 
-  	if (Object.keys(this.keysDown).length > 0) { 
-  		this.menu();
+  	if (Object.keys(this.keysDown).length > 0) {
+  		this.keysDown = {};
+  		this.menu.run();
   		return;
   	}
 
@@ -162,6 +163,7 @@
 	};
 
 	Tetris.Game.prototype.clearBg = function(){
+		this.wipeBg();
 		Tetris.bg.draw(this.ctx, 0, 0);
 	};
 

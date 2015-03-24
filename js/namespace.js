@@ -42,7 +42,7 @@
   /* Speeds */
   Tetris.FASTMOVE = 3;
   Tetris.LEVEL = [30, 20, 15, 12, 10, 6, 5];
-  Tetris.LEVELUP = 8;
+  Tetris.LEVELUP = 16;
 
   /* Particles */
   Tetris.BP_DURATION = 32;

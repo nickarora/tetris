@@ -50,7 +50,7 @@
   	
   	mainImg.onload = (function(){
   		Tetris.initMainTiles(mainImg);
-  		this.menu();
+  		this.menu.run();
   	}).bind(this);
   	
 	};
