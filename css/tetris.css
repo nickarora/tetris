@@ -28,10 +28,10 @@ body {
 .frame::after {
 	content: "";
 	position: absolute;
-	width: 384px;
+	width: 385px;
 	height: 342px;
 	top: 92px;
-	left: 118px;
+	left: 117px;
 	z-index: 1;
 	overflow: hidden;
 
