@@ -115,6 +115,7 @@
 
 	Tetris.BMF = new Tetris.BitmapText();
 	new Tetris.BitmapFontLoader('./fonts/eightbit.fnt', './fonts/eightbit.png');
+	new Tetris.BitmapFontLoader('./fonts/eightbit_w.fnt', './fonts/eightbit_w.png');
 	new Tetris.BitmapFontLoader('./fonts/bubble.fnt', './fonts/bubble.png');
 	
 })();

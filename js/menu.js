@@ -18,8 +18,11 @@
 
 	Tetris.Menu.prototype.draw = function(){
 		this.game.wipeBg();
-		Tetris.BMF.write("super", 195, 65, 'bubble', this.ctx, 'right');
-		Tetris.BMF.write("TETRIS", 215, 105, 'bubble', this.ctx, 'right');
+		Tetris.BMF.write("super", 135, 65, 'bubble', this.ctx, 'center');
+		Tetris.BMF.write("TETRIS", 135, 105, 'bubble', this.ctx, 'center');
+
+		Tetris.BMF.write("play", 145, 175, 'eightbit_w', this.ctx, 'center');
+		Tetris.BMF.write("high scores", 145, 195, 'eightbit_w', this.ctx, 'center');
 	}
 
 })();
