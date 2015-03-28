@@ -11,7 +11,14 @@
     this.explodeConfig = new Array(4);
     this.initExplodeConfig();
 
+    this.initGalaxyConfig();
+    this.infiniteLoop = false;
+
     this.blockCount = 0;
+  }
+
+  Tetris.ParticleEffects.prototype.initGalaxyConfig = function(){
+    this.galaxy = [{"pos":{"x":0,"y":0},"posVar":{"x":10,"y":0},"speed":60,"speedVar":10,"angle":90,"angleVar":360,"life":4,"lifeVar":1,"radius":40,"radiusVar":10,"textureAdditive":true,"startScale":2,"startScaleVar":0,"endScale":2,"endScaleVar":0,"startColor":[30,63,193,1],"startColorVar":[0,0,0,0],"endColor":[0,0,0,1],"endColorVar":[0,0,0,0],"colorList":[],"gravity":{"x":0,"y":0},"radialAccel":-80,"radialAccelVar":0,"tangentialAccel":80,"tangentialAccelVar":0,"texture":"./images/particle.png","totalParticles":200,"emissionRate":50,"xEquation":"","yEquation":"","textureEnabled":true,"active":true,"duration":null,"id":"title","aFactor":{"x":0,"y":0},"xFactor":{"x":0,"y":0},"border":{"top":200,"left":200,"bottom":200,"right":200},"zIndex":0}]
   }
 
   Tetris.ParticleEffects.prototype.initBlockConfig = function(){
@@ -26,6 +33,10 @@
     }
   }
 
+  Tetris.ParticleEffects.prototype.addGalaxyEmitter = function(x,y){    ;
+    this.canvasHelper.loadSystem(this.galaxy, x, y);
+  };
+
   Tetris.ParticleEffects.prototype.updateState = function(){
     if ( this.blockCount > 0) { this.blockCount--; }
     if (!this.blockCount && this.canvasHelper.emitters.length){ 
@@ -33,7 +44,7 @@
   }
 
   Tetris.ParticleEffects.prototype.draw = function(){
-    this.updateState();
+    if (!this.infiniteLoop) this.updateState();
     this.canvasHelper.draw();
   };
 
@@ -93,5 +104,10 @@
   Tetris.ParticleEffects.prototype.removeBlockEmitters = function(){
     this.canvasHelper.emitters = [];
   };
+
+  Tetris.ParticleEffects.prototype.stop = function(){
+    this.removeBlockEmitters();
+    this.blockCount = 0;
+  }
   
 })();

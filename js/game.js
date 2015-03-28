@@ -162,7 +162,7 @@
   		Tetris.BMF.write("Over", 195, 150, 'bubble', this.ctx, 'right');
   	}
 
-  	if (Object.keys(this.keysDown).length > 0) {
+  	if (Object.keys(this.keysDown).length > 0 && this.gameOverCounter >= 10) {
   		this.keysDown = {};
   		this.menu.run();
   		return;
@@ -204,6 +204,7 @@
 	Tetris.Game.prototype.landBlock = function() {
 		if (!this.board.add(this.curPiece)){
 			this.gameOver = true;
+			this.particles.stop();
 			this.showGameOver();
 		}
 

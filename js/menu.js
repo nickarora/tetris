@@ -4,19 +4,33 @@
 		this.game = opt.game;
 		this.ctx = opt.game.ctx;
 		this.choice = 0;
-	}
+	};
 
 	Tetris.Menu.prototype.run = function(){
+		this.game.wipeBg();
+		this.galaxyHandler();
 		this.draw();
 		if (!this.keyHandler()) return;
   	requestAnimationFrame(this.run.bind(this));
-	}
+	};
 
+	Tetris.Menu.prototype.galaxyHandler = function(){
+		if (this.game.particles.infiniteLoop) {
+			this.game.particles.draw();
+		} else {
+			this.game.particles.removeBlockEmitters();
+			this.game.particles.infiniteLoop = true;
+			this.game.particles.initGalaxyConfig();
+			this.game.particles.addGalaxyEmitter(145,110);
+		}
+	};
 
 	Tetris.Menu.prototype.keyHandler = function(){
 		for(var key in this.game.keysDown) {
 			if ( key != Tetris.UP && key != Tetris.DOWN) {
 				if (!this.choice){
+					this.game.particles.infiniteLoop = false;
+					this.game.particles.removeBlockEmitters();
 					this.game.initNewGame();	
 					return false;	
 				} else {
@@ -31,7 +45,6 @@
 	};
 
 	Tetris.Menu.prototype.draw = function(){
-		this.game.wipeBg();
 		Tetris.BMF.write("super", 135, 65, 'bubble', this.ctx, 'center');
 		Tetris.BMF.write("TETRIS", 135, 105, 'bubble', this.ctx, 'center');
 
