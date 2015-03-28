@@ -15,6 +15,7 @@
 
 		this.keysDown = {};
 		this.bindListeners();
+		this.gameOver = true;
 		this.menu = new Tetris.Menu({game: this});
 
 		this.loadImages();
@@ -98,12 +99,20 @@
     });
 
     $(window).keyup(function(event){
-    	if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.DROP) { 
-    		that.fastmove = false;
-    		that.fastmoveEnabled = true;
-    		that.moveCounter = 0; 
+    	if (that.gameOver){
+    		if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.UP) { 
+    			that.menu.choice = that.menu.choice ? 0 : 1;
+    		} else {
+
+    		}
+    	} else {
+	    	if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.DROP) { 
+	    		that.fastmove = false;
+	    		that.fastmoveEnabled = true;
+	    		that.moveCounter = 0; 
+	    	}
+	      delete that.keysDown[event.keyCode];
     	}
-      delete that.keysDown[event.keyCode];
     });
   };
 
