@@ -16,7 +16,11 @@ body {
 .frame {
 	position: absolute;
 	left: 50%;
-	transform: translate(-50%, 0);
+	 -webkit-transform: translate(-50%, 0);
+  -moz-transform:    translate(-50%, 0);
+  -ms-transform:     translate(-50%, 0);
+  -o-transform:      translate(-50%, 0);
+  transform:         translate(-50%, 0);
 	top: 20;
 	bottom: 0;
 	width: 610px;
