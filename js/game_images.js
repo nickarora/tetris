@@ -6,16 +6,6 @@
 		var mainImg = new Image();
 		var bgImg = new Image();
 
-		blocks[0].src = "images/block-l.png"
-		blocks[1].src = "images/block-j.png"
-		blocks[2].src = "images/block-line.png"
-		blocks[3].src = "images/block-s.png"
-		blocks[4].src = "images/block-z.png"
-		blocks[5].src = "images/block-square.png"
-		blocks[6].src = "images/block-t.png"
-		mainImg.src = "images/maintiles.png"
-		bgImg.src = "images/bg.png"
-
 		for ( var i = 0; i < blocks.length; i++ ){
 			blocks[i].onload = function(e) {
 				switch ($(e.target).attr('src')){
@@ -52,6 +42,16 @@
   		Tetris.initMainTiles(mainImg);
   		this.menu.run();
   	}).bind(this);
+
+		blocks[0].src = "images/block-l.png"
+		blocks[1].src = "images/block-j.png"
+		blocks[2].src = "images/block-line.png"
+		blocks[3].src = "images/block-s.png"
+		blocks[4].src = "images/block-z.png"
+		blocks[5].src = "images/block-square.png"
+		blocks[6].src = "images/block-t.png"
+		bgImg.src = "images/bg.png"
+		mainImg.src = "images/maintiles.png"
   	
 	};
 
