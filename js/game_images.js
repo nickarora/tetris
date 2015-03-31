@@ -6,8 +6,10 @@
 		var mainImg = new Image();
 		var bgImg = new Image();
 
+		this.allImages = blocks.concat(blocks).concat(mainImg).concat(bgImg);
+
 		for ( var i = 0; i < blocks.length; i++ ){
-			blocks[i].onload = function(e) {
+			blocks[i].onload = (function(e) {
 				switch ($(e.target).attr('src')){
 					case "images/block-l.png":
 						Tetris.LBlocks = Tetris.initTiles(e.target);
@@ -31,7 +33,7 @@
 						Tetris.TBlocks = Tetris.initTiles(e.target);
 						break;
 				}
-  		};
+  		}).bind(this);
 		}
 
   	bgImg.onload = (function(){
@@ -40,7 +42,7 @@
   	
   	mainImg.onload = (function(){
   		Tetris.initMainTiles(mainImg);
-  		this.menu.run();
+  		if (this.allImagesLoaded) this.menu.run();	
   	}).bind(this);
 
 		blocks[0].src = "images/block-l.png"
@@ -51,8 +53,23 @@
 		blocks[5].src = "images/block-square.png"
 		blocks[6].src = "images/block-t.png"
 		bgImg.src = "images/bg.png"
-		mainImg.src = "images/maintiles.png"
-  	
+		mainImg.src = "images/maintiles.png"		
 	};
+
+	Tetris.Game.prototype.allImagesLoaded = function(){
+		var num = this.allImages.length;
+		var count = 0;
+
+		this.allImagesLoaded.forEach(function(image){
+			if (image.complete) { count++; }
+		});
+
+		if (count == num &&
+			  Tetris.BMF.fonts['eightbit'] &&
+			  Tetris.BMF.fonts['eightbit_w'] &&
+			  Tetris.BMF.fonts['bubble']) { return true; }
+
+		return false;
+	}
 
 })();

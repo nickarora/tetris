@@ -1,5 +1,10 @@
 (function() {
 
+    $(window).scroll(function () { 
+      window.scrollTo(0,0);
+    });
+    
+
   Tetris.Util = function() {};
 
   Tetris.Util.prototype.inherits = function(ChildClass, ParentClass) {

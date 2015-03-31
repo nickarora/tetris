@@ -9,15 +9,11 @@
   };
 
   Tetris.Sprite.prototype.draw = function(ctx, x, y) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
-      x, y, this.width, this.height);
+    var width = Math.max(1, this.width);
+    var height = Math.max(1, this.height);
+    ctx.drawImage(this.img, this.x, this.y, width, height,
+      x, y, width, height);
   };
-
-  Tetris.Sprite.prototype.drawScale = function(ctx, x, y, scale) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
-      x, y, this.width * scale, this.height * scale);
-  };
-
 
   Tetris.Sprite.prototype.drawTransparent = function(ctx, x, y) {
     ctx.globalAlpha = 0.3;
