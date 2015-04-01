@@ -44,6 +44,47 @@
   	return true;
 	};
 
+	Tetris.Menu.prototype.clickHandler = function(e){
+		var coords = this.getRelativeCoords(e);
+		if (this.coordsWithinBounds(coords,75,172,150,25) ||
+			  this.coordsWithinBounds(coords,75,200,150,25)){
+			this.game.keysDown[Tetris.DROP] = true;
+		} else {
+			this.game.keysDown[Tetris.UP] = true;
+		}
+	};
+
+	Tetris.Menu.prototype.mouseMoveHandler = function(e){
+		var coords = this.getRelativeCoords(e);
+		if (this.coordsWithinBounds(coords,75,172,150,25)){
+			this.choice = 0;
+		} else if (this.coordsWithinBounds(coords,75,200,150,25)){
+			this.choice = 1;
+		}
+	};
+
+	Tetris.Menu.prototype.coordsWithinBounds = function(coords, topLeftX, topLeftY, width, height){
+		var x,y;
+		x = coords[0];
+		y = coords[1];
+
+		if ( x >= topLeftX && x <= topLeftX + width &&
+			   y >= topLeftY && y <= topLeftY + height){
+			return true;
+		}
+		return false;
+	};
+
+	Tetris.Menu.prototype.getRelativeCoords = function(e){
+		var clickedX, clickedY;
+		canoffset = $('canvas').offset();
+		clickedX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+		clickedY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+		clickedX = Math.floor(clickedX * .935);
+		clickedY = Math.floor(clickedY * .935);
+		return [clickedX, clickedY]
+	}
+
 	Tetris.Menu.prototype.draw = function(){
 		Tetris.BMF.write("super", 135, 65, 'bubble', this.ctx, 'center');
 		Tetris.BMF.write("TETRIS", 135, 105, 'bubble', this.ctx, 'center');

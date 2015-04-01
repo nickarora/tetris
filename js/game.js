@@ -114,6 +114,15 @@
 	      delete that.keysDown[event.keyCode];
     	}
     });
+
+    $('#main').click(function (e) {
+    	if (that.gameOver) that.menu.clickHandler(e); 
+		});
+
+		$('#main').on('mousemove', function(e){
+			if (that.gameOver) that.menu.mouseMoveHandler(e);
+		})
+
   };
 
 	Tetris.Game.prototype.play = function() {
