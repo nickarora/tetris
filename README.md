@@ -12,7 +12,7 @@ My interpretation of the classic soviet tile matching puzzle video game.  A rand
 
 ## Technologies Used
 
-Trellino is built using the following technologies
+Tetris is built using the following technologies
 - [X] JavaScript
 - [X] jQuery
 - [X] HTML
