@@ -4,8 +4,68 @@
 	<meta content="utf-8" http-equiv="encoding">
 	<title>Tetris</title>
 	<link rel="stylesheet" href="./css/tetris.css">
+	<link rel="stylesheet" href="./css/highscore.css">
 </head>
 <body>
+	<div class='how-to-play'>
+		<h3>HOW TO PLAY</h3>
+		<div class="close-button" id="close-how-to-play">Close Menu</div>
+	</div>
+	<div class='high-scores'>
+		<h3>HIGHSCORES</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>NIK</td>
+					<td>300</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>275</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>250</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>225</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>200</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>190</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>180</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>170</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>160</td>
+				</tr>
+				<tr>
+					<td>NIK</td>
+					<td>150</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="close-button" id="close-high-score">Close Menu</div>
+	</div>
 	<div class='frame'>
 		<canvas id="main"></canvas>
 	</div>
@@ -25,6 +85,8 @@
 	<script src="./js/game_images.js"></script>
 	<script src="./js/particle.js"></script>
 	<script src="./js/bitmapfont.js"></script>
+	<script src="./js/highscores.js"></script>
+	<script src="./js/instructions.js"></script>
 	<script>
 
 		var canvasEl = document.getElementsByTagName("canvas")[0];

@@ -4,6 +4,9 @@
 		this.game = opt.game;
 		this.ctx = opt.game.ctx;
 		this.choice = 0;
+
+		$('#close-high-score').click(Tetris.hideHighScores);
+		$('#close-how-to-play').click(Tetris.hideHowToPlay);
 	};
 
 	Tetris.Menu.prototype.run = function(){
@@ -33,8 +36,10 @@
 					this.game.particles.removeBlockEmitters();
 					this.game.initNewGame();	
 					return false;	
-				} else {
-					// show highscores!
+				} else if (this.choice == 1) {
+					Tetris.showHighScores();
+				} else if (this.choice == 2) {
+					Tetris.showHowToPlay();
 				}
 			}
 		}
@@ -47,7 +52,8 @@
 	Tetris.Menu.prototype.clickHandler = function(e){
 		var coords = this.getRelativeCoords(e);
 		if (this.coordsWithinBounds(coords,75,172,150,25) ||
-			  this.coordsWithinBounds(coords,75,200,150,25)){
+			  this.coordsWithinBounds(coords,75,200,150,25) || 
+			  this.coordsWithinBounds(coords,75,231,150,25)){
 			this.game.keysDown[Tetris.DROP] = true;
 		} else {
 			this.game.keysDown[Tetris.UP] = true;
@@ -60,6 +66,8 @@
 			this.choice = 0;
 		} else if (this.coordsWithinBounds(coords,75,200,150,25)){
 			this.choice = 1;
+		} else if (this.coordsWithinBounds(coords,75,231,150,25)) {
+			this.choice = 2;
 		}
 	};
 
@@ -92,15 +100,24 @@
 		if (this.choice == 0) { 
 			this.ctx.fillStyle = "rgb(253,179,43)";
       this.ctx.fillRect (75,172,150,25);
-      Tetris.BMF.write("play", 146, 176, 'eightbit', this.ctx, 'center');
-			Tetris.BMF.write("play", 145, 175, 'eightbit_w', this.ctx, 'center');
+      Tetris.BMF.write("start game", 146, 176, 'eightbit', this.ctx, 'center');
+			Tetris.BMF.write("start game", 145, 175, 'eightbit_w', this.ctx, 'center');
 			Tetris.BMF.write("high scores", 145, 205, 'eightbit_w', this.ctx, 'center');
-		} else {
+			Tetris.BMF.write("how to play", 145, 235, 'eightbit_w', this.ctx, 'center');
+		} else if (this.choice == 1) {
 			this.ctx.fillStyle = "rgb(253,179,43)";
       this.ctx.fillRect (75,200,150,25);
-			Tetris.BMF.write("play", 145, 175, 'eightbit_w', this.ctx, 'center');
+			Tetris.BMF.write("start game", 145, 175, 'eightbit_w', this.ctx, 'center');
 			Tetris.BMF.write("high scores", 146, 206, 'eightbit', this.ctx, 'center');
 			Tetris.BMF.write("high scores", 145, 205, 'eightbit_w', this.ctx, 'center');
+			Tetris.BMF.write("how to play", 145, 235, 'eightbit_w', this.ctx, 'center');
+		} else if (this.choice == 2) {
+			this.ctx.fillStyle = "rgb(253,179,43)";
+      this.ctx.fillRect (75,231,150,25);
+			Tetris.BMF.write("start game", 145, 175, 'eightbit_w', this.ctx, 'center');
+			Tetris.BMF.write("high scores", 145, 205, 'eightbit_w', this.ctx, 'center');
+			Tetris.BMF.write("how to play", 146, 236, 'eightbit', this.ctx, 'center');
+			Tetris.BMF.write("how to play", 145, 235, 'eightbit_w', this.ctx, 'center');
 		}
 		
 	}

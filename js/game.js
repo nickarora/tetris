@@ -100,10 +100,12 @@
 
     $(window).keyup(function(event){
     	if (that.gameOver){
-    		if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.UP) { 
-    			that.menu.choice = that.menu.choice ? 0 : 1;
-    		} else {
-
+    		if (event.keyCode == Tetris.DOWN) { 
+    			that.menu.choice += 1;
+    			if (that.menu.choice > 2) that.menu.choice = 0;
+    		} else if (event.keyCode == Tetris.UP) {
+    			that.menu.choice -= 1;
+    			if (that.menu.choice < 0) that.menu.choice = 2;
     		}
     	} else {
 	    	if (event.keyCode == Tetris.DOWN || event.keyCode == Tetris.DROP) { 

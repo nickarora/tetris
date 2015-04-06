@@ -1,0 +1,41 @@
+h3 {
+  font-family: eightbit;
+  text-transform: uppercase;
+  color: white;
+  font-size: 48px;
+  text-align: center;
+  margin: 10px 0 -18px 0;
+  padding: 0;
+}
+
+table {
+  font-family: eightbit;
+  width: 50%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255,255,255,.5);
+  border-collapse: collapse;
+  border-bottom: 2px solid #00acaa;
+}
+
+tr * {
+  padding: 9px 0 0 0;
+  margin: none;
+}
+
+th, td {
+  color: #333;
+  width: 50%;
+  height: 24px;
+  font-size: 12px;
+  text-align: center;
+  border: 2px dashed #777;
+  border-collapse: collapse;
+}
+
+th {
+  background: #00acaa;
+  color: #000;
+  text-transform: uppercase;
+}
