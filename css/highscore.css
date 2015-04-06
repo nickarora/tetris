@@ -6,6 +6,7 @@ h3 {
   text-align: center;
   margin: 10px 0 -18px 0;
   padding: 0;
+  text-shadow: 2px 4px 0px rgba(0,0,0,0.8);
 }
 
 table {
@@ -44,6 +45,7 @@ th {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   text-align: center;
   border-radius: 10px;
   font-family: eightbit;
@@ -65,6 +67,7 @@ th {
   text-transform: uppercase;
   color: #00acaa;
   margin-bottom: -.75em;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.8);
 }
 .instructions i {
   font-size: 2em;
