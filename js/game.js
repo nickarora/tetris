@@ -18,6 +18,7 @@
 		this.gameOver = true;
 		this.menu = new Tetris.Menu({game: this});
 
+		this.initHighScores();
 		this.loadImages();
 	};
 
@@ -127,6 +128,13 @@
 
   };
 
+  Tetris.Game.prototype.initHighScores = function(){
+  	Tetris.populateHighScores();
+		$('#close-hs-modal').click(Tetris.closeHighScoreModal);
+		$('#new-hs').submit(Tetris.saveHighScore);
+		Tetris.openHighScoreModal(95);	
+  };
+
 	Tetris.Game.prototype.play = function() {
 		
 		if (!this.gameOver){
@@ -175,7 +183,10 @@
 
   	if (Object.keys(this.keysDown).length > 0 && this.gameOverCounter >= 10) {
   		this.keysDown = {};
-  		this.menu.run();
+  		if ( this.score > Tetris.minForHS() ){
+  			Tetris.openHighScoreModal(this.score);	
+  		}
+			this.menu.run();
   		return;
   	}
 

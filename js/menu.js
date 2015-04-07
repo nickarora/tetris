@@ -28,7 +28,18 @@
 		}
 	};
 
+	Tetris.Menu.prototype.showingPopUp = function(){
+		return ($('body').hasClass('show-high-scores') || 
+						$('body').hasClass('show-how-to-play') ||
+						$('body').hasClass('modal-active'))
+	};
+
 	Tetris.Menu.prototype.keyHandler = function(){
+		if (this.showingPopUp()) {
+			this.game.keysDown = {};
+			return true; 
+		}
+		
 		for(var key in this.game.keysDown) {
 			if ( key != Tetris.UP && key != Tetris.DOWN) {
 				if (!this.choice){
@@ -45,7 +56,6 @@
 		}
 
 		this.game.keysDown = {};
-
   	return true;
 	};
 

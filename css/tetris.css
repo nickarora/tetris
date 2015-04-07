@@ -144,3 +144,19 @@ canvas#main {
 	background: #333;
 	cursor: pointer;
 }
+
+.close-button.small {
+	top: .50em;
+	right: -.25em;
+}
+
+.close-button.small::before,
+.close-button.small::after {
+	height: 16px;
+	background: #000;
+}
+
+.close-button.small:hover:before, .close-button.small:hover:after {
+	background: red;
+	cursor: pointer;
+}

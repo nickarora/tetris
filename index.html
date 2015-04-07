@@ -5,7 +5,7 @@
 	<title>Tetris</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./css/tetris.css">
-	<link rel="stylesheet" href="./css/highscore.css">
+	<link rel="stylesheet" href="./css/hs-instructions.css">
 </head>
 <body>
 	<div class='how-to-play'>
@@ -46,59 +46,35 @@
 					<th>Score</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>NIK</td>
-					<td>300</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>275</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>250</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>225</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>200</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>190</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>180</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>170</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>160</td>
-				</tr>
-				<tr>
-					<td>NIK</td>
-					<td>150</td>
-				</tr>
+			<tbody id='hs-list'>
 			</tbody>
 		</table>
-
 		<div class="close-button" id="close-high-score">Close Menu</div>
 	</div>
-	<div class='frame'>
-		<canvas id="main"></canvas>
+
+	<div id="hs-canvas">
+		<div class='frame'>
+			<canvas id="main"></canvas>
+		</div>
 	</div>
-	
-	<script src="./lib/jquery-2.1.3.min.js"></script>
+
+	<div id="hs-modal">
+  	<div class="close-button small" id="close-hs-modal"></div>
+  	<p id='hs-modal-points'><span id='points'></span> POINTS!</p>
+  	<p>Congratulations on your High Score!</p>
+  	
+  	<p>Enter Three Initials:</p>
+  	<form id="new-hs">
+	  	<p><input type="text" id="name" maxlength="3"></input></p>
+	  	<p><input type="submit" value="SAVE"></input></p>
+  	</form>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 	<script src="./lib/EPSY.min.js"></script>
 	<script src="./lib/EPSY.CanvasHelper.js"></script>
+	<script src="./lib/handlebars.js"></script>
 	<script src="./js/namespace.js"></script>
 	<script src="./js/loadimages.js"></script>
 	<script src="./js/utils.js"></script>
@@ -113,13 +89,18 @@
 	<script src="./js/bitmapfont.js"></script>
 	<script src="./js/highscores.js"></script>
 	<script src="./js/instructions.js"></script>
+	<script id="hs-template" type="text/x-handlebars-template">
+		<tr>
+			<td>{{name}}</td>
+			<td>{{score}}</td>
+		</tr>
+	</script>
 	<script>
-
 		var canvasEl = document.getElementsByTagName("canvas")[0];
     canvasEl.height = 320;
     canvasEl.width = 304;
 		var tetris = new Tetris.Game(canvasEl);
-		
+
 	</script>
 </body>
 </html>
