@@ -132,7 +132,6 @@
   	Tetris.populateHighScores();
 		$('#close-hs-modal').click(Tetris.closeHighScoreModal);
 		$('#new-hs').submit(Tetris.saveHighScore);
-		Tetris.openHighScoreModal(95);	
   };
 
 	Tetris.Game.prototype.play = function() {
