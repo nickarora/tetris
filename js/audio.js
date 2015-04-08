@@ -18,7 +18,7 @@
 		});
 
 		this.lineRemove = new Howl({
-  		urls: ['./sounds/line-remove.ogg']
+  		urls: ['./sounds/line-remove.mp3']
 		});
 
 		this.tetris = new Howl({
