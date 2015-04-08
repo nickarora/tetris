@@ -1,6 +1,13 @@
 @font-face {
     font-family: 'eightbit';
-    src: url('../fonts/minecraftia.ttf') format('truetype');
+    src: url('../fonts/minecraftia-webfont.eot');
+    src: url('../fonts/minecraftia-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/minecraftia-webfont.woff2') format('woff2'),
+         url('../fonts/minecraftia-webfont.woff') format('woff'),
+         url('../fonts/minecraftia-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 html,body {
