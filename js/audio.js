@@ -1,6 +1,8 @@
 (function(){
 
 	Tetris.Audio = function(){
+		var that = this;
+
 		this.blockRotate = new Howl({
   		urls: ['./sounds/block-rotate.mp3']
 		});
@@ -34,7 +36,10 @@
 		});
 
 		this.gameover = new Howl({
-  		urls: ['./sounds/gameover.mp3']
+  		urls: ['./sounds/gameover.mp3'],
+  		onend: function(){
+  			that.music.play();
+  		}
 		});
 
 		this.start = new Howl({
@@ -45,5 +50,12 @@
   		urls: ['./sounds/pause.mp3']
 		});
 
+		this.music = new Howl({
+		  urls: ['./sounds/music.mp3'],
+		  loop: true,
+		  volume: 0.25,
+		
+		});
 	};
+
 })()

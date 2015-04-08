@@ -241,6 +241,7 @@
 		if (!this.board.add(this.curPiece)){
 			this.gameOver = true;
 			this.particles.stop();
+			this.audio.music.stop();
 			this.audio.gameover.play();
 			this.showGameOver();
 		}
@@ -290,6 +291,11 @@
 			} else if (key == Tetris.ESC){
 				this.audio.pause.play();
 				this.paused = this.paused ? false : true;
+				if (this.paused) {
+					this.audio.music.pause();
+				} else {
+					this.audio.music.play();
+				}
 			} else if (key == Tetris.DOWN && this.fastmoveEnabled){
 				this.fastmove = true;
 			} else if (key == Tetris.DROP && this.fastmoveEnabled){

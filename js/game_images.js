@@ -42,7 +42,11 @@
   	
   	mainImg.onload = (function(){
   		Tetris.initMainTiles(mainImg);
-  		if (this.allImagesLoaded) this.menu.run();	
+  		if (this.allImagesLoaded) {
+  			this.audio.music.play();
+  			this.menu.run();	
+  		}
+
   	}).bind(this);
 
 		blocks[0].src = "images/block-l.png"
