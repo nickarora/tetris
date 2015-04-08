@@ -50,6 +50,8 @@
 		}
 		
 		for(var key in this.game.keysDown) {
+			$('canvas').css( 'cursor', 'default' );
+
 			if ( key != Tetris.UP && key != Tetris.DOWN) {
 				if (!this.choice){
 					this.game.particles.infiniteLoop = false;
@@ -88,12 +90,17 @@
 		if (this.coordsWithinBounds(coords,75,172,150,25)){
 			if (this.choice != 0) this.game.audio.select.play();
 			this.choice = 0;
+			$('canvas').css( 'cursor', 'pointer' );
 		} else if (this.coordsWithinBounds(coords,75,200,150,25)){
 			if (this.choice != 1) this.game.audio.select.play();
 			this.choice = 1;
+			$('canvas').css( 'cursor', 'pointer' );
 		} else if (this.coordsWithinBounds(coords,75,231,150,25)) {
 			if (this.choice != 2) this.game.audio.select.play();
 			this.choice = 2;
+			$('canvas').css( 'cursor', 'pointer' );
+		} else {
+			$('canvas').css( 'cursor', 'default' );
 		}
 	};
 
