@@ -29,5 +29,21 @@
   		urls: ['./sounds/select.mp3']
 		});
 
+		this.whoosh = new Howl({
+  		urls: ['./sounds/whoosh.mp3']
+		});
+
+		this.gameover = new Howl({
+  		urls: ['./sounds/gameover.mp3']
+		});
+
+		this.start = new Howl({
+  		urls: ['./sounds/start.mp3']
+		});
+
+		this.pause = new Howl({
+  		urls: ['./sounds/pause.mp3']
+		});
+
 	};
 })()

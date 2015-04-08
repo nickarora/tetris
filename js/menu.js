@@ -5,8 +5,17 @@
 		this.ctx = opt.game.ctx;
 		this.choice = 0;
 
-		$('#close-high-score').click(Tetris.hideHighScores);
-		$('#close-how-to-play').click(Tetris.hideHowToPlay);
+		var that = this;
+
+		$('#close-high-score').click(function(){
+			that.game.audio.whoosh.play();
+			Tetris.hideHighScores();
+		});
+		
+		$('#close-how-to-play').click(function(){
+			that.game.audio.whoosh.play();
+			Tetris.hideHowToPlay();
+		});
 	};
 
 	Tetris.Menu.prototype.run = function(){
@@ -45,11 +54,14 @@
 				if (!this.choice){
 					this.game.particles.infiniteLoop = false;
 					this.game.particles.removeBlockEmitters();
+					this.game.audio.start.play();
 					this.game.initNewGame();	
 					return false;	
 				} else if (this.choice == 1) {
+					this.game.audio.whoosh.play();
 					Tetris.showHighScores();
 				} else if (this.choice == 2) {
+					this.game.audio.whoosh.play();
 					Tetris.showHowToPlay();
 				}
 			}
