@@ -145,6 +145,9 @@
 
 		this.particles.addExplosions(this.completed);
 		this.particles.blockCount = Tetris.FLASH_DURATION * 2;
+		this.game.audio.lineDrop.play(); 
+		this.game.audio.lineRemove.play();
+		if (this.completed.length == 4) { this.game.audio.tetris.play(); }		
 		this.completed = [];
 	};
 
@@ -161,7 +164,7 @@
 	Tetris.Board.prototype.remove = function(row) {
 		for (var y = row; y >= 1; y--){
 			for (var x = 1; x < Tetris.BOARD_WIDTH - 1; x++){
-				this.set(x,y, this.get(x,y - 1).color)
+				this.set(x,y, this.get(x,y - 1).color);
 			}
 		}
 	};

@@ -72,11 +72,15 @@
 
 	Tetris.Menu.prototype.mouseMoveHandler = function(e){
 		var coords = this.getRelativeCoords(e);
+
 		if (this.coordsWithinBounds(coords,75,172,150,25)){
+			if (this.choice != 0) this.game.audio.select.play();
 			this.choice = 0;
 		} else if (this.coordsWithinBounds(coords,75,200,150,25)){
+			if (this.choice != 1) this.game.audio.select.play();
 			this.choice = 1;
 		} else if (this.coordsWithinBounds(coords,75,231,150,25)) {
+			if (this.choice != 2) this.game.audio.select.play();
 			this.choice = 2;
 		}
 	};

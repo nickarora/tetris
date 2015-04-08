@@ -5,6 +5,7 @@
 
 		this.particles = new Tetris.ParticleEffects({ctx: this.ctx});
 		this.board = new Tetris.Board({ ctx: this.ctx, particles: this.particles, game: this });
+		this.audio = new Tetris.Audio();
 	
 		this.history = [
 			Math.floor(Math.random()*7),
@@ -102,9 +103,11 @@
     $(window).keyup(function(event){
     	if (that.gameOver){
     		if (event.keyCode == Tetris.DOWN) { 
+    			that.audio.select.play();
     			that.menu.choice += 1;
     			if (that.menu.choice > 2) that.menu.choice = 0;
     		} else if (event.keyCode == Tetris.UP) {
+    			that.audio.select.play();
     			that.menu.choice -= 1;
     			if (that.menu.choice < 0) that.menu.choice = 2;
     		}
@@ -233,6 +236,9 @@
 			this.particles.add(this.curPiece); 
 			this.fastmove = false;
 			this.fastmoveEnabled = false;
+			this.audio.forceHit.play();
+		} else {
+			this.audio.slowHit.play();
 		}
 		
 		this.board.update();
@@ -260,6 +266,7 @@
 			} else if (key == Tetris.X) {
 				this.curPiece.rotateRight();
 			} else if (key == Tetris.UP){
+				this.audio.blockRotate.play();
 				this.curPiece.rotateRight();
 			} else if (key == Tetris.LEFT){
 				this.curPiece.moveLeft();
