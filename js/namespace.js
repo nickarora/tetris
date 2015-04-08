@@ -38,6 +38,7 @@
   Tetris.Z = 122;
   Tetris.X = 120;
   Tetris.DROP = 32;
+  Tetris.ESC = 27;
 
   /* Speeds */
   Tetris.FASTMOVE = 3;

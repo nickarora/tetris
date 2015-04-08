@@ -86,6 +86,7 @@
 		this.keysDown = {};
 
 		this.score = 0;
+		this.paused = false;
 
 		requestAnimationFrame(this.play.bind(this));
 	};
@@ -148,23 +149,28 @@
 			this.nextPiece.preview();
 			this.keyHandler();
 
-			if (!this.board.exploding()){
-				this.curPiece.draw();
-				this.moveCounter++;
-				if (this.moveCounter > 60) { this.moveCounter = 1; }		
-				
+			if (!this.paused){
+				if (!this.board.exploding()){
+					this.curPiece.draw();
+					this.moveCounter++;
+					if (this.moveCounter > 60) { this.moveCounter = 1; }		
+					
 
-				if (this.fastmove) {
-					if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
-						this.attemptBlockMove();
-					}
-				} else {
-					if ( this.moveCounter % this.speed == 0 ) { 
-						this.attemptBlockMove();
+					if (this.fastmove) {
+						if ( this.moveCounter % Tetris.FASTMOVE == 0 ) { 
+							this.attemptBlockMove();
+						}
+					} else {
+						if ( this.moveCounter % this.speed == 0 ) { 
+							this.attemptBlockMove();
+						}
 					}
 				}
+			} else {
+				this.curPiece.draw();
+				this.showPause();
 			}
-			
+
 			requestAnimationFrame(this.play.bind(this));
 		}
 	};
@@ -172,6 +178,12 @@
 	Tetris.Game.prototype.wipeBg = function() {
 		this.ctx.fillStyle = 'rgba(0,0,0,1)';
 		this.ctx.fillRect(0,0, 304, 320);
+	};
+
+	Tetris.Game.prototype.showPause = function(){
+		this.ctx.fillStyle = 'rgba(50,11,11,0.5)';
+		this.ctx.fillRect(0,0, 304, 320);
+		Tetris.BMF.write("Paused", 135, 135, 'bubble', this.ctx, 'center');
 	};
 
 	Tetris.Game.prototype.showGameOver = function(){
@@ -261,6 +273,8 @@
 	Tetris.Game.prototype.keyHandler = function(){
 		
 		for(var key in this.keysDown) {
+			if (this.paused && key != Tetris.ESC) continue;
+
 			if ( key == Tetris.Z) {
 				this.curPiece.rotateLeft();
 			} else if (key == Tetris.X) {
@@ -272,6 +286,8 @@
 				this.curPiece.moveLeft();
 			} else if (key == Tetris.RIGHT){
 				this.curPiece.moveRight();
+			} else if (key == Tetris.ESC){
+				this.paused = this.paused ? false : true;
 			} else if (key == Tetris.DOWN && this.fastmoveEnabled){
 				this.fastmove = true;
 			} else if (key == Tetris.DROP && this.fastmoveEnabled){
