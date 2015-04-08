@@ -2,7 +2,6 @@
 
 [Live Demo][sitelink]
 [sitelink]: http://nickarora.github.io/tetris/
-* Note: Still In Progress - not all features fully functional yet *
 
 ![preview]
 [preview]:	./docs/preview.png
@@ -15,5 +14,7 @@ My interpretation of the classic soviet tile matching puzzle video game.  A rand
 Tetris is built using the following technologies
 - [X] JavaScript
 - [X] jQuery
-- [X] HTML
-- [X] CSS
+- [X] HTML5
+- [X] CSS3
+- [X] Handlebar Templating
+- [X] PARSE Database

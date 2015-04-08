@@ -1,6 +1,6 @@
 @font-face {
-    font-family: eightbit;
-    src: url('../fonts/minecraftia.ttf');
+    font-family: 'eightbit';
+    src: url('../fonts/minecraftia.ttf') format('truetype');
 }
 
 html,body {
