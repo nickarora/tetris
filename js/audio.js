@@ -52,9 +52,10 @@
 
 		this.music = new Howl({
 		  urls: ['./sounds/music.mp3'],
-		  loop: true,
 		  volume: 0.25,
-		
+  		onend: function(){
+  			that.music.play();
+  		}
 		});
 	};
 
