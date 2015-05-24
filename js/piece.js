@@ -114,9 +114,9 @@
 
 		var testShape = this.shapes[this.current]
 		var lowestRow = Tetris.BOARD_HEIGHT - 1 - this.height();
-
 		hitY = null;
 
+		hitY = lowestRow;
 		for (var y = this.y+1; y <= lowestRow; y++){
 			if (!this.checkCollision(this.x, y, this.current)){
 				hitY = y - 1;
