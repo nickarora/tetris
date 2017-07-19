@@ -1,7 +1,18 @@
 (function(){
 
-	Parse.initialize("kUXU2YTJwTSy8v2myucFpCtV8Qlw3mn2x4s8Kx98", "U9UWpI2bNOKkX5jtCIkgimfqd8tueFP3NFqOZFhT");
-	Tetris.curHighScores = [];
+	Tetris.defaultHighScores = function() {
+		var scores = []
+		for (i = 10; i > 0; i--) {
+			scores.push({
+				name: 'BOB',
+				score: i * 10 + 9999
+			})
+		}
+
+		return scores
+	}
+
+	Tetris.curHighScores = Tetris.defaultHighScores()
 
 	Tetris.showHighScores = function(e){
 		if (!$('body').hasClass('show-high-scores')){
@@ -13,44 +24,30 @@
 		$('body').removeClass('show-high-scores');
 	};
 
-	Tetris.populateHighScores = function(){
-		var HighScore = Parse.Object.extend("HighScore");
-		var query = new Parse.Query(HighScore);
-		query.descending('score');
-		query.limit(10);
+	Tetris.populateHighScores = function() {
+		var template = Handlebars.compile($('#hs-template').html())
+		$('#hs-list').html("")
+		Tetris.curHighScores.forEach(function(score) {
+			$('#hs-list').append(template(score))
+		})
 
-		query.find({
-			success: function(results){
-				Tetris.curHighScores = [];
-				$('#hs-list').html("");
-				var template = Handlebars.compile($('#hs-template').html());
-				results.forEach(function(result){
-					var q = result.toJSON();
-					Tetris.curHighScores.push(q.score);
-					$('#hs-list').append(template(q))
-				});
-			},
-			error: function(error){
-				console.log(error.message);
-			}
-		});
-
+		/* save High score to your db. see example code below */
+		// fetch(highScoresUrl)
+		// 	.then(results => results.json())
+		// 	.then(scores => {
+		// 		Tetris.curHighScores = [];
+		// 		$('#hs-list').html("");
+		// 		scores.forEach(score => {
+		// 			Tetris.curHighScores.push(q.score);
+		// 			$('#hs-list').append(template(q))
+		// 		})
+		// 	})
 	};
 
 	Tetris.saveHighScore = function(e, hs){
 		e.preventDefault();
-		var HighScore = Parse.Object.extend("HighScore");
-		var hs = new HighScore();
-		hs.set('name', $(e.target).find('#name').val());
-		hs.set('score', Number($('#hs-modal').find('#points').text()));
-		hs.save(null, {
-			success: function(){
-				Tetris.closeHighScoreModal();
-			},
-			error: function(hs, error){
-				console.log(error.message);
-			}
-		});
+		// push highscore to your database
+		Tetris.closeHighScoreModal();
 	}
 
 	Tetris.openHighScoreModal = function(score){
